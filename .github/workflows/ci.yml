@@ -62,29 +62,44 @@ jobs:
           echo "No coverage badge found" && exit 1
         fi
 
-    - name: Publish Coverage to gh-pages
+    - name: Publish coverage to gh-pages
+      if: github.ref == 'refs/heads/main'
       run: |
+        set -e
+
         git config user.email "github-actions@github.com"
         git config user.name "github-actions"
 
-        # Ensure branch exists
-        git fetch origin gh-pages || true
-        git switch gh-pages || git switch --orphan gh-pages
+        # Make sure we know about remote branches
+        git fetch origin
 
-        # Clean old coverage
-        rm -rf coverage-report
+        # Create a separate worktree for gh-pages
+        if git ls-remote --exit-code origin gh-pages > /dev/null 2>&1; then
+          echo "Using existing gh-pages branch"
+          git worktree add gh-pages-dir origin/gh-pages
+        else
+          echo "Creating new gh-pages branch"
+          git worktree add gh-pages-dir gh-pages --orphan
+        fi
 
-        # Copy freshly generated coverage
-        cp -R ../coverage-report ./coverage-report
+        # Clean gh-pages content
+        rm -rf gh-pages-dir/*
 
-        # Create/update the badge reference
-        mv coverage-report/badge_linecoverage.svg coverage.svg
+        # Copy fresh coverage output into gh-pages-dir
+        cp -R coverage-report/* gh-pages-dir/
 
-        # Commit and push
-        git add coverage-report coverage.svg
-        git commit -m "Update coverage report"
-        git push origin gh-pages --force
-      working-directory: ./ # Root of the repo
+        # Pick a badge to expose as coverage.svg (line coverage)
+        if [ -f coverage-report/badge_linecoverage.svg ]; then
+          cp coverage-report/badge_linecoverage.svg gh-pages-dir/coverage.svg
+        elif [ -f coverage-report/badge_combined.svg ]; then
+          cp coverage-report/badge_combined.svg gh-pages-dir/coverage.svg
+        fi
+
+        cd gh-pages-dir
+        git add .
+        git commit -m "Update coverage report" || echo "No changes to commit"
+        git push origin gh-pages
+
 
   deploy:
     needs: build-test-coverage
