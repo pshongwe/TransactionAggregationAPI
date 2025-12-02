@@ -70,36 +70,32 @@ jobs:
         git config user.email "github-actions@github.com"
         git config user.name "github-actions"
 
-        # Make sure we know about remote branches
         git fetch origin
 
-        # Create a separate worktree for gh-pages
+        # Create isolated gh-pages worktree under .gh-pages folder
+        rm -rf .gh-pages
+
         if git ls-remote --exit-code origin gh-pages > /dev/null 2>&1; then
-          echo "Using existing gh-pages branch"
-          git worktree add gh-pages-dir origin/gh-pages
+          git worktree add .gh-pages origin/gh-pages
         else
-          echo "Creating new gh-pages branch"
-          git worktree add gh-pages-dir gh-pages --orphan
+          git worktree add .gh-pages gh-pages --orphan
         fi
 
-        # Clean gh-pages content
-        rm -rf gh-pages-dir/*
+        # Now ONLY delete inside .gh-pages (safe)
+        rm -rf .gh-pages/*
 
-        # Copy fresh coverage output into gh-pages-dir
-        cp -R coverage-report/* gh-pages-dir/
+        # Copy coverage output into the gh-pages folder
+        cp -R coverage-report/* .gh-pages/
 
-        # Pick a badge to expose as coverage.svg (line coverage)
+        # Export the badge as coverage.svg
         if [ -f coverage-report/badge_linecoverage.svg ]; then
-          cp coverage-report/badge_linecoverage.svg gh-pages-dir/coverage.svg
-        elif [ -f coverage-report/badge_combined.svg ]; then
-          cp coverage-report/badge_combined.svg gh-pages-dir/coverage.svg
+          cp coverage-report/badge_linecoverage.svg .gh-pages/coverage.svg
         fi
 
-        cd gh-pages-dir
-        git add .
+        cd .gh-pages
+        git add --all
         git commit -m "Update coverage report" || echo "No changes to commit"
         git push origin gh-pages
-
 
   deploy:
     needs: build-test-coverage
