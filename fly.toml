@@ -1,6 +1,6 @@
 # fly.toml
 
-app = "transaction-aggregation-api"
+app = "transactionaggregationapi"
 primary_region = "jnb"
 
 kill_signal = "SIGINT"
