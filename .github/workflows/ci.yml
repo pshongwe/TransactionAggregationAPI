@@ -62,25 +62,29 @@ jobs:
           echo "No coverage badge found" && exit 1
         fi
 
-    - name: Publish to gh-pages
-      if: github.ref == 'refs/heads/main'
+    - name: Publish Coverage to gh-pages
       run: |
         git config user.email "github-actions@github.com"
         git config user.name "github-actions"
 
-        git fetch
-        git checkout gh-pages || git checkout --orphan gh-pages
+        # Ensure branch exists
+        git fetch origin gh-pages || true
+        git switch gh-pages || git switch --orphan gh-pages
 
-        mkdir -p coverage-report
-        mkdir -p badge
+        # Clean old coverage
+        rm -rf coverage-report
 
-        cp -r coverage-report/* coverage-report/
-        cp -r badge/* badge/
+        # Copy freshly generated coverage
+        cp -R ../coverage-report ./coverage-report
 
-        git add coverage-report badge
-        git commit -m "Update coverage report [skip ci]" || echo "No changes to commit"
+        # Create/update the badge reference
+        mv coverage-report/badge_linecoverage.svg coverage.svg
 
-        git push origin gh-pages
+        # Commit and push
+        git add coverage-report coverage.svg
+        git commit -m "Update coverage report"
+        git push origin gh-pages --force
+      working-directory: ./ # Root of the repo
 
   deploy:
     needs: build-test-coverage
