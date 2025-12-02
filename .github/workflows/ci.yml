@@ -15,8 +15,6 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -45,57 +43,42 @@ jobs:
           -reports:"**/coverage.cobertura.xml" \
           -targetdir:"coverage-report" \
           -reporttypes:"Html;Badges"
-      env:
-        PATH: $PATH:/github/home/.dotnet/tools
 
-    - name: Create badge directory
-      run: mkdir -p badge
-
-    - name: Copy coverage badge
-      run: |
-        # Pick *line coverage* badge (common default)
-        if [ -f coverage-report/badge_linecoverage.svg ]; then
-          cp coverage-report/badge_linecoverage.svg badge/coverage.svg
-        elif [ -f coverage-report/coverage.svg ]; then
-          cp coverage-report/coverage.svg badge/coverage.svg
-        else
-          echo "No coverage badge found" && exit 1
-        fi
-
-    - name: Publish coverage to gh-pages
+    - name: Publish coverage to gh-pages (SAFE)
       if: github.ref == 'refs/heads/main'
       run: |
         set -e
 
-        git config user.email "github-actions@github.com"
-        git config user.name "github-actions"
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
 
-        git fetch origin
+        # Prepare a clean temporary directory
+        rm -rf ghpages-tmp
+        mkdir ghpages-tmp
 
-        # Create isolated gh-pages worktree under .gh-pages folder
-        rm -rf .gh-pages
-
+        # If remote branch exists, fetch minimal snapshot
         if git ls-remote --exit-code origin gh-pages > /dev/null 2>&1; then
-          git worktree add .gh-pages origin/gh-pages
+          git clone --depth=1 --branch gh-pages \
+            "https://github.com/${{ github.repository }}" ghpages-tmp
         else
-          git worktree add .gh-pages gh-pages --orphan
+          git -C ghpages-tmp init
+          git -C ghpages-tmp checkout -b gh-pages
         fi
 
-        # Now ONLY delete inside .gh-pages (safe)
-        rm -rf .gh-pages/*
+        # Wipe ONLY the folder contents
+        rm -rf ghpages-tmp/*
 
-        # Copy coverage output into the gh-pages folder
-        cp -R coverage-report/* .gh-pages/
+        # Copy coverage HTML + badge
+        cp -R coverage-report/* ghpages-tmp/
 
-        # Export the badge as coverage.svg
-        if [ -f coverage-report/badge_linecoverage.svg ]; then
-          cp coverage-report/badge_linecoverage.svg .gh-pages/coverage.svg
-        fi
+        # Normalised badge
+        cp coverage-report/badge_linecoverage.svg ghpages-tmp/coverage.svg || true
 
-        cd .gh-pages
+        cd ghpages-tmp
         git add --all
-        git commit -m "Update coverage report" || echo "No changes to commit"
-        git push origin gh-pages
+
+        git commit -m "Update coverage report" || echo "No changes"
+        git push "https://github.com/${{ github.repository }}" gh-pages
 
   deploy:
     needs: build-test-coverage
