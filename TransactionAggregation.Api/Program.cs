@@ -11,6 +11,16 @@ public partial class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Allow Fly.io hostnames
+        builder.WebHost.ConfigureKestrel(options =>
+        {
+            options.ListenAnyIP(8080); // fly.io expects your container listening on 8080
+        });
+
+        // Required so Host header mismatch does not break the app
+        builder.WebHost.UseSetting(WebHostDefaults.PreferHostingUrlsKey, "true");
+        builder.WebHost.UseUrls("http://0.0.0.0:8080");
+
         // Configure logging
         builder.Logging.ClearProviders();
         builder.Logging.AddConsole();
