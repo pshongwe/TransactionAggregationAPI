@@ -1,0 +1,1118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0.9625" branch-rate="0.6547" version="1.9" timestamp="1764709498" lines-covered="231" lines-valid="240" branches-covered="55" branches-valid="84">
+  <sources>
+    <source>/src/</source>
+  </sources>
+  <packages>
+    <package name="TransactionAggregation.Api" line-rate="0.9576" branch-rate="0.6215999999999999" complexity="101">
+      <classes>
+        <class name="TransactionAggregation.Api.Program" filename="TransactionAggregation.Api/Program.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="Main" signature="(System.String[])" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="10" hits="3" branch="False" />
+                <line number="11" hits="3" branch="False" />
+                <line number="14" hits="3" branch="False" />
+                <line number="15" hits="3" branch="False" />
+                <line number="16" hits="3" branch="False" />
+                <line number="19" hits="3" branch="False" />
+                <line number="20" hits="3" branch="False" />
+                <line number="21" hits="3" branch="False" />
+                <line number="24" hits="3" branch="False" />
+                <line number="26" hits="3" branch="False" />
+                <line number="28" hits="3" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="113" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="29" hits="3" branch="False" />
+                <line number="30" hits="3" branch="False" />
+                <line number="31" hits="3" branch="False" />
+                <line number="32" hits="3" branch="False" />
+                <line number="34" hits="3" branch="False" />
+                <line number="36" hits="3" branch="False" />
+                <line number="38" hits="3" branch="False" />
+                <line number="39" hits="3" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="3" branch="False" />
+            <line number="11" hits="3" branch="False" />
+            <line number="14" hits="3" branch="False" />
+            <line number="15" hits="3" branch="False" />
+            <line number="16" hits="3" branch="False" />
+            <line number="19" hits="3" branch="False" />
+            <line number="20" hits="3" branch="False" />
+            <line number="21" hits="3" branch="False" />
+            <line number="24" hits="3" branch="False" />
+            <line number="26" hits="3" branch="False" />
+            <line number="28" hits="3" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="113" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="29" hits="3" branch="False" />
+            <line number="30" hits="3" branch="False" />
+            <line number="31" hits="3" branch="False" />
+            <line number="32" hits="3" branch="False" />
+            <line number="34" hits="3" branch="False" />
+            <line number="36" hits="3" branch="False" />
+            <line number="38" hits="3" branch="False" />
+            <line number="39" hits="3" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Mapping.DtoMappers" filename="TransactionAggregation.Api/Mapping/DtoMappers.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="ToDto" signature="(TransactionAggregation.Domain.Models.UnifiedTransaction)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="9" branch="False" />
+                <line number="10" hits="9" branch="False" />
+                <line number="11" hits="9" branch="False" />
+                <line number="12" hits="9" branch="False" />
+                <line number="13" hits="9" branch="False" />
+                <line number="14" hits="9" branch="False" />
+                <line number="15" hits="9" branch="False" />
+                <line number="16" hits="9" branch="False" />
+                <line number="17" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="ToDto" signature="(System.Collections.Generic.IEnumerable`1&lt;TransactionAggregation.Domain.Models.UnifiedTransaction&gt;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="20" hits="10" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="9" hits="9" branch="False" />
+            <line number="10" hits="9" branch="False" />
+            <line number="11" hits="9" branch="False" />
+            <line number="12" hits="9" branch="False" />
+            <line number="13" hits="9" branch="False" />
+            <line number="14" hits="9" branch="False" />
+            <line number="15" hits="9" branch="False" />
+            <line number="16" hits="9" branch="False" />
+            <line number="17" hits="9" branch="False" />
+            <line number="20" hits="10" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Dtos.CategorySummaryDto" filename="TransactionAggregation.Api/Dtos/CategorySummaryDto.cs" line-rate="1" branch-rate="1" complexity="4">
+          <methods>
+            <method name="get_Category" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="7" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_TotalAmount" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_TransactionCount" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.Decimal,System.Int32)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="8" branch="False" />
+                <line number="10" hits="8" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="8" branch="False" />
+            <line number="8" hits="8" branch="False" />
+            <line number="9" hits="8" branch="False" />
+            <line number="6" hits="8" branch="False" />
+            <line number="10" hits="8" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Dtos.TransactionDto" filename="TransactionAggregation.Api/Dtos/TransactionDto.cs" line-rate="1" branch-rate="1" complexity="8">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Amount" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Date" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="12" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Currency" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Description" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="20" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Category" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Source" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="26" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="17" branch="False" />
+                <line number="7" hits="17" branch="False" />
+                <line number="9" hits="17" branch="False" />
+                <line number="10" hits="17" branch="False" />
+                <line number="12" hits="17" branch="False" />
+                <line number="13" hits="17" branch="False" />
+                <line number="15" hits="17" branch="False" />
+                <line number="16" hits="17" branch="False" />
+                <line number="18" hits="17" branch="False" />
+                <line number="19" hits="17" branch="False" />
+                <line number="21" hits="17" branch="False" />
+                <line number="22" hits="17" branch="False" />
+                <line number="24" hits="17" branch="False" />
+                <line number="25" hits="17" branch="False" />
+                <line number="27" hits="17" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="13" branch="False" />
+            <line number="11" hits="9" branch="False" />
+            <line number="14" hits="12" branch="False" />
+            <line number="17" hits="14" branch="False" />
+            <line number="20" hits="9" branch="False" />
+            <line number="23" hits="14" branch="False" />
+            <line number="26" hits="14" branch="False" />
+            <line number="6" hits="17" branch="False" />
+            <line number="7" hits="17" branch="False" />
+            <line number="9" hits="17" branch="False" />
+            <line number="10" hits="17" branch="False" />
+            <line number="12" hits="17" branch="False" />
+            <line number="13" hits="17" branch="False" />
+            <line number="15" hits="17" branch="False" />
+            <line number="16" hits="17" branch="False" />
+            <line number="18" hits="17" branch="False" />
+            <line number="19" hits="17" branch="False" />
+            <line number="21" hits="17" branch="False" />
+            <line number="22" hits="17" branch="False" />
+            <line number="24" hits="17" branch="False" />
+            <line number="25" hits="17" branch="False" />
+            <line number="27" hits="17" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Controllers.TransactionsController" filename="TransactionAggregation.Api/Controllers/TransactionsController.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="HealthCheck" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="52" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(TransactionAggregation.Domain.Abstractions.ITransactionAggregationService)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="4" branch="False" />
+                <line number="15" hits="4" branch="False" />
+                <line number="16" hits="4" branch="False" />
+                <line number="17" hits="4" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="52" hits="1" branch="False" />
+            <line number="14" hits="4" branch="False" />
+            <line number="15" hits="4" branch="False" />
+            <line number="16" hits="4" branch="False" />
+            <line number="17" hits="4" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Controllers.TransactionsController/&lt;&gt;c" filename="TransactionAggregation.Api/Controllers/TransactionsController.cs" line-rate="1" branch-rate="1" complexity="3">
+          <methods>
+            <method name="&lt;GetCustomerSummary&gt;b__3_0" signature="(TransactionAggregation.Domain.Models.UnifiedTransaction)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="38" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="&lt;GetCustomerSummary&gt;b__3_1" signature="(System.Linq.IGrouping`2&lt;System.String,TransactionAggregation.Domain.Models.UnifiedTransaction&gt;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="39" hits="4" branch="False" />
+                <line number="40" hits="4" branch="False" />
+                <line number="41" hits="5" branch="False" />
+                <line number="42" hits="4" branch="False" />
+                <line number="43" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name="&lt;GetCustomerSummary&gt;b__3_2" signature="(TransactionAggregation.Api.Dtos.CategorySummaryDto)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="44" hits="4" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="38" hits="5" branch="False" />
+            <line number="39" hits="4" branch="False" />
+            <line number="40" hits="4" branch="False" />
+            <line number="41" hits="5" branch="False" />
+            <line number="42" hits="4" branch="False" />
+            <line number="43" hits="4" branch="False" />
+            <line number="44" hits="4" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Controllers.TransactionsController/&lt;GetCustomerSummary&gt;d__3" filename="TransactionAggregation.Api/Controllers/TransactionsController.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="34" hits="1" branch="False" />
+                <line number="35" hits="1" branch="False" />
+                <line number="37" hits="1" branch="False" />
+                <line number="45" hits="1" branch="False" />
+                <line number="47" hits="1" branch="False" />
+                <line number="48" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="34" hits="1" branch="False" />
+            <line number="35" hits="1" branch="False" />
+            <line number="37" hits="1" branch="False" />
+            <line number="45" hits="1" branch="False" />
+            <line number="47" hits="1" branch="False" />
+            <line number="48" hits="1" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Controllers.TransactionsController/&lt;GetCustomerTransactions&gt;d__2" filename="TransactionAggregation.Api/Controllers/TransactionsController.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="25" hits="2" branch="False" />
+                <line number="26" hits="2" branch="False" />
+                <line number="27" hits="2" branch="False" />
+                <line number="28" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="25" hits="2" branch="False" />
+            <line number="26" hits="2" branch="False" />
+            <line number="27" hits="2" branch="False" />
+            <line number="28" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Adapters.ASourceAdapter" filename="TransactionAggregation.Api/Adapters/ASourceAdapter.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_SourceName" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="7" branch="False" />
+                <line number="15" hits="7" branch="False" />
+                <line number="16" hits="7" branch="False" />
+                <line number="17" hits="7" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="13" branch="False" />
+            <line number="14" hits="7" branch="False" />
+            <line number="15" hits="7" branch="False" />
+            <line number="16" hits="7" branch="False" />
+            <line number="17" hits="7" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Adapters.ASourceAdapter/&lt;FetchAndNormalizeAsync&gt;d__4" filename="TransactionAggregation.Api/Adapters/ASourceAdapter.cs" line-rate="0.9354" branch-rate="0.625" complexity="24">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="0.9354" branch-rate="0.625" complexity="24">
+              <lines>
+                <line number="22" hits="7" branch="False" />
+                <line number="23" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="36" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="24" hits="0" branch="False" />
+                <line number="26" hits="7" branch="False" />
+                <line number="27" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="219" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="28" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="248" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="29" hits="0" branch="False" />
+                <line number="31" hits="7" branch="False" />
+                <line number="33" hits="49" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="684" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="34" hits="14" branch="False" />
+                <line number="35" hits="14" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="326" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="37" hits="14" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="351" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="38" hits="14" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="392" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="39" hits="1" branch="False" />
+                <line number="41" hits="13" branch="True" condition-coverage="50% (2/4)">
+                  <conditions>
+                    <condition number="417" type="jump" coverage="50%" />
+                    <condition number="429" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="42" hits="13" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="475" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="43" hits="13" branch="False" />
+                <line number="44" hits="13" branch="True" condition-coverage="50% (2/4)">
+                  <conditions>
+                    <condition number="545" type="jump" coverage="50%" />
+                    <condition number="557" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="46" hits="13" branch="False" />
+                <line number="47" hits="13" branch="False" />
+                <line number="48" hits="13" branch="False" />
+                <line number="49" hits="13" branch="False" />
+                <line number="50" hits="13" branch="False" />
+                <line number="51" hits="13" branch="False" />
+                <line number="52" hits="13" branch="False" />
+                <line number="53" hits="13" branch="False" />
+                <line number="54" hits="13" branch="False" />
+                <line number="55" hits="13" branch="False" />
+                <line number="56" hits="13" branch="False" />
+                <line number="58" hits="7" branch="False" />
+                <line number="59" hits="7" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="22" hits="7" branch="False" />
+            <line number="23" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="36" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="24" hits="0" branch="False" />
+            <line number="26" hits="7" branch="False" />
+            <line number="27" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="219" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="28" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="248" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="29" hits="0" branch="False" />
+            <line number="31" hits="7" branch="False" />
+            <line number="33" hits="49" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="684" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="34" hits="14" branch="False" />
+            <line number="35" hits="14" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="326" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="37" hits="14" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="351" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="38" hits="14" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="392" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="39" hits="1" branch="False" />
+            <line number="41" hits="13" branch="True" condition-coverage="50% (2/4)">
+              <conditions>
+                <condition number="417" type="jump" coverage="50%" />
+                <condition number="429" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="42" hits="13" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="475" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="43" hits="13" branch="False" />
+            <line number="44" hits="13" branch="True" condition-coverage="50% (2/4)">
+              <conditions>
+                <condition number="545" type="jump" coverage="50%" />
+                <condition number="557" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="46" hits="13" branch="False" />
+            <line number="47" hits="13" branch="False" />
+            <line number="48" hits="13" branch="False" />
+            <line number="49" hits="13" branch="False" />
+            <line number="50" hits="13" branch="False" />
+            <line number="51" hits="13" branch="False" />
+            <line number="52" hits="13" branch="False" />
+            <line number="53" hits="13" branch="False" />
+            <line number="54" hits="13" branch="False" />
+            <line number="55" hits="13" branch="False" />
+            <line number="56" hits="13" branch="False" />
+            <line number="58" hits="7" branch="False" />
+            <line number="59" hits="7" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Adapters.BSourceAdapter" filename="TransactionAggregation.Api/Adapters/BSourceAdapter.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_SourceName" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="7" branch="False" />
+                <line number="15" hits="7" branch="False" />
+                <line number="16" hits="7" branch="False" />
+                <line number="17" hits="7" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="7" branch="False" />
+            <line number="14" hits="7" branch="False" />
+            <line number="15" hits="7" branch="False" />
+            <line number="16" hits="7" branch="False" />
+            <line number="17" hits="7" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Adapters.BSourceAdapter/&lt;FetchAndNormalizeAsync&gt;d__4" filename="TransactionAggregation.Api/Adapters/BSourceAdapter.cs" line-rate="0.9354" branch-rate="0.625" complexity="24">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="0.9354" branch-rate="0.625" complexity="24">
+              <lines>
+                <line number="22" hits="7" branch="False" />
+                <line number="23" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="36" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="24" hits="0" branch="False" />
+                <line number="26" hits="7" branch="False" />
+                <line number="27" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="219" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="28" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="248" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="29" hits="0" branch="False" />
+                <line number="31" hits="7" branch="False" />
+                <line number="33" hits="49" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="684" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="34" hits="14" branch="False" />
+                <line number="35" hits="14" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="326" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="37" hits="14" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="351" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="38" hits="14" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="392" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="39" hits="7" branch="False" />
+                <line number="41" hits="7" branch="True" condition-coverage="50% (2/4)">
+                  <conditions>
+                    <condition number="417" type="jump" coverage="50%" />
+                    <condition number="429" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="42" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="475" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="43" hits="7" branch="False" />
+                <line number="44" hits="7" branch="True" condition-coverage="50% (2/4)">
+                  <conditions>
+                    <condition number="545" type="jump" coverage="50%" />
+                    <condition number="557" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="46" hits="7" branch="False" />
+                <line number="47" hits="7" branch="False" />
+                <line number="48" hits="7" branch="False" />
+                <line number="49" hits="7" branch="False" />
+                <line number="50" hits="7" branch="False" />
+                <line number="51" hits="7" branch="False" />
+                <line number="52" hits="7" branch="False" />
+                <line number="53" hits="7" branch="False" />
+                <line number="54" hits="7" branch="False" />
+                <line number="55" hits="7" branch="False" />
+                <line number="56" hits="7" branch="False" />
+                <line number="58" hits="7" branch="False" />
+                <line number="59" hits="7" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="22" hits="7" branch="False" />
+            <line number="23" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="36" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="24" hits="0" branch="False" />
+            <line number="26" hits="7" branch="False" />
+            <line number="27" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="219" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="28" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="248" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="29" hits="0" branch="False" />
+            <line number="31" hits="7" branch="False" />
+            <line number="33" hits="49" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="684" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="34" hits="14" branch="False" />
+            <line number="35" hits="14" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="326" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="37" hits="14" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="351" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="38" hits="14" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="392" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="39" hits="7" branch="False" />
+            <line number="41" hits="7" branch="True" condition-coverage="50% (2/4)">
+              <conditions>
+                <condition number="417" type="jump" coverage="50%" />
+                <condition number="429" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="42" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="475" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="43" hits="7" branch="False" />
+            <line number="44" hits="7" branch="True" condition-coverage="50% (2/4)">
+              <conditions>
+                <condition number="545" type="jump" coverage="50%" />
+                <condition number="557" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="46" hits="7" branch="False" />
+            <line number="47" hits="7" branch="False" />
+            <line number="48" hits="7" branch="False" />
+            <line number="49" hits="7" branch="False" />
+            <line number="50" hits="7" branch="False" />
+            <line number="51" hits="7" branch="False" />
+            <line number="52" hits="7" branch="False" />
+            <line number="53" hits="7" branch="False" />
+            <line number="54" hits="7" branch="False" />
+            <line number="55" hits="7" branch="False" />
+            <line number="56" hits="7" branch="False" />
+            <line number="58" hits="7" branch="False" />
+            <line number="59" hits="7" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Adapters.CSourceAdapter" filename="TransactionAggregation.Api/Adapters/CSourceAdapter.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_SourceName" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="7" branch="False" />
+                <line number="15" hits="7" branch="False" />
+                <line number="16" hits="7" branch="False" />
+                <line number="17" hits="7" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="14" branch="False" />
+            <line number="14" hits="7" branch="False" />
+            <line number="15" hits="7" branch="False" />
+            <line number="16" hits="7" branch="False" />
+            <line number="17" hits="7" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Api.Adapters.CSourceAdapter/&lt;FetchAndNormalizeAsync&gt;d__4" filename="TransactionAggregation.Api/Adapters/CSourceAdapter.cs" line-rate="0.8823000000000001" branch-rate="0.5832999999999999" complexity="24">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="0.8823000000000001" branch-rate="0.5832999999999999" complexity="24">
+              <lines>
+                <line number="22" hits="7" branch="False" />
+                <line number="23" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="36" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="24" hits="0" branch="False" />
+                <line number="26" hits="7" branch="False" />
+                <line number="27" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="219" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="28" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="248" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="29" hits="0" branch="False" />
+                <line number="31" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="279" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="32" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="320" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="33" hits="0" branch="False" />
+                <line number="35" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="351" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="36" hits="7" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="380" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="37" hits="0" branch="False" />
+                <line number="39" hits="7" branch="False" />
+                <line number="41" hits="49" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="711" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="42" hits="14" branch="False" />
+                <line number="43" hits="14" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="458" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="45" hits="14" branch="False" />
+                <line number="46" hits="14" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="509" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="47" hits="14" branch="False" />
+                <line number="48" hits="14" branch="True" condition-coverage="50% (2/4)">
+                  <conditions>
+                    <condition number="579" type="jump" coverage="50%" />
+                    <condition number="591" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="50" hits="14" branch="False" />
+                <line number="51" hits="14" branch="False" />
+                <line number="52" hits="14" branch="False" />
+                <line number="53" hits="14" branch="False" />
+                <line number="54" hits="14" branch="False" />
+                <line number="55" hits="14" branch="False" />
+                <line number="56" hits="14" branch="False" />
+                <line number="57" hits="14" branch="False" />
+                <line number="58" hits="14" branch="False" />
+                <line number="59" hits="14" branch="False" />
+                <line number="60" hits="14" branch="False" />
+                <line number="62" hits="7" branch="False" />
+                <line number="63" hits="7" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="22" hits="7" branch="False" />
+            <line number="23" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="36" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="24" hits="0" branch="False" />
+            <line number="26" hits="7" branch="False" />
+            <line number="27" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="219" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="28" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="248" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="29" hits="0" branch="False" />
+            <line number="31" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="279" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="32" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="320" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="33" hits="0" branch="False" />
+            <line number="35" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="351" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="36" hits="7" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="380" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="37" hits="0" branch="False" />
+            <line number="39" hits="7" branch="False" />
+            <line number="41" hits="49" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="711" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="42" hits="14" branch="False" />
+            <line number="43" hits="14" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="458" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="45" hits="14" branch="False" />
+            <line number="46" hits="14" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="509" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="47" hits="14" branch="False" />
+            <line number="48" hits="14" branch="True" condition-coverage="50% (2/4)">
+              <conditions>
+                <condition number="579" type="jump" coverage="50%" />
+                <condition number="591" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="50" hits="14" branch="False" />
+            <line number="51" hits="14" branch="False" />
+            <line number="52" hits="14" branch="False" />
+            <line number="53" hits="14" branch="False" />
+            <line number="54" hits="14" branch="False" />
+            <line number="55" hits="14" branch="False" />
+            <line number="56" hits="14" branch="False" />
+            <line number="57" hits="14" branch="False" />
+            <line number="58" hits="14" branch="False" />
+            <line number="59" hits="14" branch="False" />
+            <line number="60" hits="14" branch="False" />
+            <line number="62" hits="7" branch="False" />
+            <line number="63" hits="7" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="TransactionAggregation.Domain" line-rate="0.9803000000000001" branch-rate="0.9" complexity="26">
+      <classes>
+        <class name="TransactionAggregation.Domain.Services.Categorizer" filename="TransactionAggregation.Domain/Services/Categorizer.cs" line-rate="0.96" branch-rate="0.8332999999999999" complexity="7">
+          <methods>
+            <method name="Categorize" signature="(System.String)" line-rate="0.9" branch-rate="0.8332999999999999" complexity="6">
+              <lines>
+                <line number="26" hits="34" branch="False" />
+                <line number="27" hits="34" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="9" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="28" hits="0" branch="False" />
+                <line number="30" hits="571" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="82" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="31" hits="250" branch="False" />
+                <line number="32" hits="250" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="66" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="33" hits="31" branch="False" />
+                <line number="34" hits="219" branch="False" />
+                <line number="36" hits="3" branch="False" />
+                <line number="37" hits="34" branch="False" />
+              </lines>
+            </method>
+            <method name=".cctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="1" branch="False" />
+                <line number="10" hits="1" branch="False" />
+                <line number="11" hits="1" branch="False" />
+                <line number="12" hits="1" branch="False" />
+                <line number="13" hits="1" branch="False" />
+                <line number="14" hits="1" branch="False" />
+                <line number="15" hits="1" branch="False" />
+                <line number="16" hits="1" branch="False" />
+                <line number="17" hits="1" branch="False" />
+                <line number="18" hits="1" branch="False" />
+                <line number="19" hits="1" branch="False" />
+                <line number="20" hits="1" branch="False" />
+                <line number="21" hits="1" branch="False" />
+                <line number="22" hits="1" branch="False" />
+                <line number="23" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="26" hits="34" branch="False" />
+            <line number="27" hits="34" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="9" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="28" hits="0" branch="False" />
+            <line number="30" hits="571" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="82" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="31" hits="250" branch="False" />
+            <line number="32" hits="250" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="66" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="33" hits="31" branch="False" />
+            <line number="34" hits="219" branch="False" />
+            <line number="36" hits="3" branch="False" />
+            <line number="37" hits="34" branch="False" />
+            <line number="9" hits="1" branch="False" />
+            <line number="10" hits="1" branch="False" />
+            <line number="11" hits="1" branch="False" />
+            <line number="12" hits="1" branch="False" />
+            <line number="13" hits="1" branch="False" />
+            <line number="14" hits="1" branch="False" />
+            <line number="15" hits="1" branch="False" />
+            <line number="16" hits="1" branch="False" />
+            <line number="17" hits="1" branch="False" />
+            <line number="18" hits="1" branch="False" />
+            <line number="19" hits="1" branch="False" />
+            <line number="20" hits="1" branch="False" />
+            <line number="21" hits="1" branch="False" />
+            <line number="22" hits="1" branch="False" />
+            <line number="23" hits="1" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Domain.Services.TransactionAggregationService" filename="TransactionAggregation.Domain/Services/TransactionAggregationService.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(System.Collections.Generic.IEnumerable`1&lt;TransactionAggregation.Domain.Abstractions.ITransactionSourceAdapter&gt;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="9" branch="False" />
+                <line number="15" hits="9" branch="False" />
+                <line number="16" hits="9" branch="False" />
+                <line number="17" hits="9" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="14" hits="9" branch="False" />
+            <line number="15" hits="9" branch="False" />
+            <line number="16" hits="9" branch="False" />
+            <line number="17" hits="9" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Domain.Services.TransactionAggregationService/&lt;&gt;c" filename="TransactionAggregation.Domain/Services/TransactionAggregationService.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="&lt;GetAllAsync&gt;b__2_1" signature="(System.Collections.Generic.IReadOnlyList`1&lt;TransactionAggregation.Domain.Models.UnifiedTransaction&gt;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="29" hits="30" branch="False" />
+              </lines>
+            </method>
+            <method name="&lt;GetAllAsync&gt;b__2_4" signature="(TransactionAggregation.Domain.Models.UnifiedTransaction)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="39" hits="30" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="29" hits="30" branch="False" />
+            <line number="39" hits="30" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Domain.Services.TransactionAggregationService/&lt;&gt;c__DisplayClass2_0" filename="TransactionAggregation.Domain/Services/TransactionAggregationService.cs" line-rate="1" branch-rate="1" complexity="3">
+          <methods>
+            <method name="&lt;GetAllAsync&gt;b__0" signature="(TransactionAggregation.Domain.Abstractions.ITransactionSourceAdapter)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="26" hits="30" branch="False" />
+              </lines>
+            </method>
+            <method name="&lt;GetAllAsync&gt;b__2" signature="(TransactionAggregation.Domain.Models.UnifiedTransaction)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="32" hits="16" branch="False" />
+              </lines>
+            </method>
+            <method name="&lt;GetAllAsync&gt;b__3" signature="(TransactionAggregation.Domain.Models.UnifiedTransaction)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="35" hits="11" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="26" hits="30" branch="False" />
+            <line number="32" hits="16" branch="False" />
+            <line number="35" hits="11" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Domain.Services.TransactionAggregationService/&lt;GetAllAsync&gt;d__2" filename="TransactionAggregation.Domain/Services/TransactionAggregationService.cs" line-rate="1" branch-rate="1" complexity="4">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="1" branch-rate="1" complexity="4">
+              <lines>
+                <line number="24" hits="8" branch="False" />
+                <line number="27" hits="8" branch="False" />
+                <line number="31" hits="8" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="329" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="34" hits="8" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="385" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="38" hits="8" branch="False" />
+                <line number="40" hits="8" branch="False" />
+                <line number="41" hits="8" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="24" hits="8" branch="False" />
+            <line number="27" hits="8" branch="False" />
+            <line number="31" hits="8" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="329" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="34" hits="8" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="385" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="38" hits="8" branch="False" />
+            <line number="40" hits="8" branch="False" />
+            <line number="41" hits="8" branch="False" />
+          </lines>
+        </class>
+        <class name="TransactionAggregation.Domain.Models.UnifiedTransaction" filename="TransactionAggregation.Domain/Models/UnifiedTransaction.cs" line-rate="1" branch-rate="1" complexity="9">
+          <methods>
+            <method name="get_TransactionId" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="18" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CustomerId" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="5" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Amount" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="18" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Currency" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="7" hits="16" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Timestamp" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="73" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Description" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Category" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="18" branch="False" />
+              </lines>
+            </method>
+            <method name="get_SourceName" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="25" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.String,System.Decimal,System.String,System.DateTime,System.String,System.String,System.String)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="3" hits="41" branch="False" />
+                <line number="12" hits="41" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="18" branch="False" />
+            <line number="5" hits="4" branch="False" />
+            <line number="6" hits="18" branch="False" />
+            <line number="7" hits="16" branch="False" />
+            <line number="8" hits="73" branch="False" />
+            <line number="9" hits="13" branch="False" />
+            <line number="10" hits="18" branch="False" />
+            <line number="11" hits="25" branch="False" />
+            <line number="3" hits="41" branch="False" />
+            <line number="12" hits="41" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  tests:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    container_name: transaction-aggregation-tests
+    working_dir: /src
+    volumes:
+      - ./:/src
+    command: >
+      bash -c "
+        echo 'Restoring packages...' &&
+        dotnet restore &&
+        echo 'Running tests...' &&
+        dotnet test
+      "

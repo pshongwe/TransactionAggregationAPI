@@ -1,0 +1,16 @@
+[
+  {
+    "id": "B200",
+    "customer": "C1",
+    "value": 20000.00,
+    "timestamp": "2025-11-01T08:00:00Z",
+    "merchant": "Salary from Employer"
+  },
+  {
+    "id": "B201",
+    "customer": "C2",
+    "value": -50.00,
+    "timestamp": "2025-11-03T19:00:00Z",
+    "merchant": "MTN AirTime Purchase"
+  }
+]

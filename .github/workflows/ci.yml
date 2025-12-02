@@ -1,0 +1,100 @@
+name: CI + Deploy to Fly.io
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  build-test-coverage:
+    name: Build, test, coverage, deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run tests + collect coverage
+        run: dotnet test --collect:"XPlat Code Coverage" --results-directory TestResults
+
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: Generate Coverage Report (HTML + Cobertura)
+        run: |
+          export PATH="$PATH:/home/runner/.dotnet/tools"
+          reportgenerator \
+            -reports:"TestResults/*/coverage.cobertura.xml" \
+            -targetdir:"coverage-report" \
+            -reporttypes:"Html;Cobertura"
+
+      - name: Upload HTML coverage as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage-report
+
+      ####################################################
+      # COVERAGE BADGE
+      ####################################################
+      - name: Extract coverage percentage
+        id: coverage
+        run: |
+          RATE=$(grep -oP 'line-rate="\K[0-9.]+' TestResults/*/coverage.cobertura.xml)
+          PERCENT=$(printf "%.0f" "$(echo "$RATE * 100" | bc)")
+          echo "percent=$PERCENT" >> $GITHUB_OUTPUT
+
+      - name: Generate badge
+        run: |
+          PCT=${{ steps.coverage.outputs.percent }}
+          COLOR="red"
+          if [ "$PCT" -ge 90 ]; then COLOR="brightgreen";
+          elif [ "$PCT" -ge 75 ]; then COLOR="green";
+          elif [ "$PCT" -ge 60 ]; then COLOR="yellowgreen";
+          elif [ "$PCT" -ge 40 ]; then COLOR="yellow"; fi
+
+          mkdir -p badge
+          cat > badge/coverage.svg <<EOF
+          <svg xmlns="http://www.w3.org/2000/svg" width="120" height="20">
+            <rect width="70" height="20" fill="#555"/>
+            <rect x="70" width="50" height="20" fill="$COLOR"/>
+            <text x="35" y="14" fill="#fff" font-family="Verdana" font-size="11" text-anchor="middle">coverage</text>
+            <text x="95" y="14" fill="#fff" font-family="Verdana" font-size="11" text-anchor="middle">$PCT%</text>
+          </svg>
+          EOF
+
+      - name: Publish coverage badge to gh-pages
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
+          git fetch origin gh-pages || true
+          git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
+
+          rm -rf ./*
+          cp badge/coverage.svg .
+
+          git add coverage.svg
+          git commit -m "Update coverage badge" || echo "Nothing to commit"
+          git push -f origin gh-pages
+
+      ####################################################
+      # DEPLOY TO FLY.IO
+      ####################################################
+      - name: Install Fly.io CLI
+        uses: superfly/flyctl-actions/setup-flyctl@v1
+
+      - name: Deploy to Fly.io
+        if: github.ref == 'refs/heads/main'
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
