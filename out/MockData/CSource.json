@@ -1,0 +1,15 @@
+{
+  "account": "C1",
+  "entries": [
+    {
+      "amt": 200,
+      "date": "2025-12-01",
+      "desc": "Salary"
+    },
+    {
+      "amt": -50,
+      "date": "2025-12-01",
+      "desc": "AirTime MTN"
+    }
+  ]
+}

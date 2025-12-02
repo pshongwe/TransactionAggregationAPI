@@ -1,0 +1,16 @@
+[
+  {
+    "txn_id": "A100",
+    "cust": "C1",
+    "amount": 150.00,
+    "when": "2025-11-01T12:00:00Z",
+    "text": "Pick n Pay Sandton"
+  },
+  {
+    "txn_id": "A101",
+    "cust": "C1",
+    "amount": -300.00,
+    "when": "2025-11-02T09:00:00Z",
+    "text": "Uber Trip Johannesburg"
+  }
+]
