@@ -23,8 +23,7 @@ public partial class Program
 
         var app = builder.Build();
 
-        // 🚫 REMOVE THIS (Breaks in containers)
-        // app.UseHttpsRedirection();
+        app.UseHttpsRedirection();
 
         app.UseSwagger();
         app.UseSwaggerUI();
