@@ -62,9 +62,6 @@ public partial class Program
             app.UseHttpsRedirection();
         }
 
-        app.UseSwagger();
-        app.UseSwaggerUI();
-
         
         // Map health checks endpoint
         app.MapHealthChecks("/health");
