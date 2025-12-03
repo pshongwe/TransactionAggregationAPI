@@ -35,5 +35,5 @@ kill_timeout = 5
     interval = "10s"
     timeout = "2s"
     method = "GET"
-    path = "/"
+    path = "/health"
     protocol = "http"
