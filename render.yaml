@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: transactionaggregationapi
+    env: docker
+    plan: free
+    branch: main
+    autoDeploy: true
+
+    # Render will build using your Dockerfile
+    dockerfilePath: ./Dockerfile
+
+    envVars:
+      # Render exposes the actual port via $PORT
+      - key: ASPNETCORE_URLS
+        value: "http://0.0.0.0:${PORT}"
+
+      - key: ASPNETCORE_ENVIRONMENT
+        value: "Production"
+
+    # Health checks
+    healthCheckPath: /health
+
+    # Render defaults to HTTP only on free tier
+    # so no HTTPS redirect issues
+
