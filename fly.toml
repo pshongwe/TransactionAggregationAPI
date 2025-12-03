@@ -1,9 +1,6 @@
 app = "transactionaggregationapi"
 primary_region = "jnb"
 
-kill_signal = "SIGINT"
-kill_timeout = 5
-
 [build]
   dockerfile = "Dockerfile"
 
@@ -14,9 +11,6 @@ kill_timeout = 5
 [[services]]
   internal_port = 8080
   protocol = "tcp"
-  auto_start_machines = true
-  auto_stop_machines = true
-  min_machines_running = 1
 
   [[services.ports]]
     port = 80
@@ -26,14 +20,9 @@ kill_timeout = 5
     port = 443
     handlers = ["tls", "http"]
 
-  [services.concurrency]
-    type = "requests"
-    soft_limit = 20
-    hard_limit = 25
-
   [services.http_checks]
-    interval = "10s"
-    timeout = "2s"
     method = "GET"
     path = "/health"
+    interval = "10s"
+    timeout = "2s"
     protocol = "http"
