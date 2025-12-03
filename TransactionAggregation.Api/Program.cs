@@ -23,7 +23,11 @@ public partial class Program
 
         var app = builder.Build();
 
-        app.UseHttpsRedirection();
+        if (!app.Environment.IsProduction())
+        {
+            app.UseHttpsRedirection();
+        }
+
 
         app.UseSwagger();
         app.UseSwaggerUI();
