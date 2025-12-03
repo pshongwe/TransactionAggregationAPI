@@ -11,8 +11,11 @@ public partial class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Explicitly listen on Fly.io port (8080)
-        builder.WebHost.UseUrls("http://0.0.0.0:8080");
+        // Force Kestrel to listen on 0.0.0.0:8080 — REQUIRED for Fly.io
+        builder.WebHost
+            .UseKestrel()
+            .UseUrls(Environment.GetEnvironmentVariable("ASPNETCORE_URLS")
+                     ?? "http://0.0.0.0:8080");
 
         // Services
         builder.Services.AddControllers();
@@ -27,24 +30,21 @@ public partial class Program
 
         var app = builder.Build();
 
-        // *** IMPORTANT ***
-        // Never redirect HTTP → HTTPS on Fly.io containers
-        // Fly proxy handles TLS termination at the edge.
-        // Redirecting breaks internal /health checks.
-        // Only enable redirect in DEVELOPMENT.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseHttpsRedirection();
-        }
+        // ❌ NEVER redirect to HTTPS on Fly.io
+        // Fly handles HTTPS termination outside the VM
+        //
+        // REMOVE THIS COMPLETELY:
+        // if (!app.Environment.IsProduction())
+        // {
+        //     app.UseHttpsRedirection();
+        // }
 
-        // Enable Swagger ALWAYS (Fly prod servers hide UI unless explicitly enabled)
+        // Swagger always on
         app.UseSwagger();
         app.UseSwaggerUI();
 
-        // Health endpoint for Fly.io
+        // Routes
         app.MapHealthChecks("/health");
-
-        // Controllers
         app.MapControllers();
 
         app.Run();

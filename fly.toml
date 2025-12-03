@@ -1,18 +1,16 @@
 app = "transactionaggregationapi"
-primary_region = "jnb"
-
-[build]
-  dockerfile = "Dockerfile"
+primary_region = "jnb" # Johannesburg region
 
 [env]
   ASPNETCORE_ENVIRONMENT = "Production"
+  # ASPNETCORE_URLS is removed as Fly.io handles routing to the internal port
 
 [http_service]
-  internal_port = 8080
-  force_https = false         
+  internal_port = 8080          # Explicitly define the internal port
+  force_https = true            # Re-enabled HTTPS (best practice for APIs)
   auto_stop_machines = true
   auto_start_machines = true
-  min_machines_running = 1
+  min_machines_running = 1      # Ensure at least one machine is running
 
   [http_service.concurrency]
     type = "requests"
@@ -20,7 +18,7 @@ primary_region = "jnb"
     hard_limit = 25
 
   [[http_service.checks]]
-    type = "http"
+    # Ensure health checks use the correct internal port and protocol
     interval = "10s"
     timeout = "2s"
     method = "GET"
