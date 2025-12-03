@@ -4,25 +4,15 @@ primary_region = "jnb"
 [build]
   dockerfile = "Dockerfile"
 
-[env]
-  ASPNETCORE_URLS = "http://0.0.0.0:8080"
-  ASPNETCORE_ENVIRONMENT = "Production"
-
-[[services]]
+[http_service]
   internal_port = 8080
-  protocol = "tcp"
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
 
-  [[services.ports]]
-    port = 80
-    handlers = ["http"]
-
-  [[services.ports]]
-    port = 443
-    handlers = ["tls", "http"]
-
-  [services.http_checks]
-    method = "GET"
-    path = "/health"
+  [[http_service.checks]]
+    type = "http"
     interval = "10s"
     timeout = "2s"
-    protocol = "http"
+    method = "GET"
+    path = "/health"
