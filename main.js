@@ -222,7 +222,7 @@ var assemblies = [
       { "name": "TransactionAggregation.Api.Mapping.DtoMappers", "rp": "TransactionAggregation.Api_DtoMappers.html", "cl": 20, "ucl": 0, "cal": 20, "tl": 42, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Middleware.ErrorResponse", "rp": "TransactionAggregation.Api_ErrorResponse.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 74, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Middleware.ExceptionHandlingMiddleware", "rp": "TransactionAggregation.Api_ExceptionHandlingMiddleware.html", "cl": 0, "ucl": 29, "cal": 29, "tl": 74, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Program", "rp": "TransactionAggregation.Api_Program.html", "cl": 38, "ucl": 0, "cal": 38, "tl": 92, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Program", "rp": "TransactionAggregation.Api_Program.html", "cl": 39, "ucl": 0, "cal": 39, "tl": 92, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "TransactionAggregation.Domain",
