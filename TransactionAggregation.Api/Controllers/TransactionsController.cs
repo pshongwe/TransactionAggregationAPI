@@ -28,24 +28,20 @@ public class TransactionsController : ControllerBase
     }
 
     [HttpGet("transactions/summary")]
-    public async Task<ActionResult<IEnumerable<CategorySummaryDto>>> GetCustomerSummary(
-        string customerId,
-        CancellationToken ct)
-    {
-        var txns = await _svc.GetAllAsync(customerId, null, null, ct);
+public async Task<ActionResult<IEnumerable<CategorySummaryDto>>> GetCustomerSummary(
+    string customerId,
+    DateTime? from,
+    DateTime? to,
+    CancellationToken ct)
+{
+    if (string.IsNullOrWhiteSpace(customerId))
+        return BadRequest("customerId cannot be empty.");
 
-        var summary = txns
-            .GroupBy(t => t.Category)
-            .Select(g => new CategorySummaryDto(
-                Category: g.Key,
-                TotalAmount: g.Sum(x => x.Amount),
-                TransactionCount: g.Count()
-            ))
-            .OrderByDescending(s => Math.Abs(s.TotalAmount))
-            .ToList();
+    var summary = await _svc.GetCategorySummaryAsync(customerId, from, to, ct);
 
-        return Ok(summary);
-    }
+    return Ok(summary);
+}
+
 
     [HttpGet("")]
     public IActionResult HealthCheck()

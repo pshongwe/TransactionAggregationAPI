@@ -39,4 +39,28 @@ public sealed class TransactionAggregationService : ITransactionAggregationServi
             .OrderByDescending(t => t.Timestamp)
             .ToList();
     }
+
+    public async Task<IReadOnlyList<CategorySummary>> GetCategorySummaryAsync(
+        string customerId,
+        DateTime? from,
+        DateTime? to,
+        CancellationToken ct)
+    {
+        var txns = await GetAllAsync(customerId, from, to, ct);
+
+        // return empty list early
+        if (txns.Count == 0)
+            return Array.Empty<CategorySummary>();
+
+        return txns
+            .GroupBy(t => t.Category)
+            .Select(g => new CategorySummary(
+                Category: g.Key,
+                TotalAmount: g.Sum(x => x.Amount),
+                TransactionCount: g.Count()
+            ))
+            .OrderByDescending(s => Math.Abs(s.TotalAmount))
+            .ToList();
+    }
+
 }

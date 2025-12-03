@@ -192,12 +192,41 @@ All adapters and services use `async/await` for non-blocking I/O.
 
 ## 🔍 Possible Future Enhancements
 
-- Add persistence (PostgreSQL / SQLite)  
-- Add message-based ingestion (Kafka, RabbitMQ)  
-- Replace deterministic categorizer with ML-based classification  
-- Support gRPC or streaming endpoints  
-- Add caching (Redis / MemoryCache)  
-- Add OpenAPI documentation via Swashbuckle  
+- Add persistence (PostgreSQL / SQLite)   
+- Replace deterministic categorizer with ML-based classification    
+
+---
+# 🧪 Running Tests Locally with Podman
+
+You can run the full test suite without installing the .NET SDK on your machine by using Podman with the official Microsoft .NET SDK image:
+
+```sh
+podman run -it --rm \
+  -v $(pwd):/src \
+  -w /src \
+  mcr.microsoft.com/dotnet/sdk:8.0 \
+  dotnet test
+```
+
+## Example output
+```
+Determining projects to restore...
+Restored /src/TransactionAggregation.Api/TransactionAggregation.Api.csproj (in 4.9 sec).
+Restored /src/TransactionAggregation.Tests/TransactionAggregation.Tests.csproj (in 17.34 sec).
+1 of 3 projects are up-to-date for restore.
+
+TransactionAggregation.Domain -> /src/TransactionAggregation.Domain/bin/Debug/net8.0/TransactionAggregation.Domain.dll
+TransactionAggregation.Api -> /src/TransactionAggregation.Api/bin/Debug/net8.0/TransactionAggregation.Api.dll
+TransactionAggregation.Tests -> /src/TransactionAggregation.Tests/bin/Debug/net8.0/TransactionAggregation.Tests.dll
+
+Test run for /src/TransactionAggregation.Tests/bin/Debug/net8.0/TransactionAggregation.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.11.1 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed: 0, Passed: 13, Skipped: 0, Total: 13, Duration: 215 ms - TransactionAggregation.Tests.dll (net8.0)
+```
 
 ---
 

@@ -1,6 +1,5 @@
-using TransactionAggregation.Api.Mapping;
-using TransactionAggregation.Domain.Models;
 using TransactionAggregation.Tests.TestUtils;
+using TransactionAggregation.Api.Mapping;
 using Xunit;
 
 namespace TransactionAggregation.Tests.Mapping;

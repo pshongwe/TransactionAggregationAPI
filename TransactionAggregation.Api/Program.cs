@@ -30,15 +30,6 @@ public partial class Program
 
         var app = builder.Build();
 
-        // ❌ NEVER redirect to HTTPS on Fly.io
-        // Fly handles HTTPS termination outside the VM
-        //
-        // REMOVE THIS COMPLETELY:
-        // if (!app.Environment.IsProduction())
-        // {
-        //     app.UseHttpsRedirection();
-        // }
-
         // Swagger always on
         app.UseSwagger();
         app.UseSwaggerUI();
