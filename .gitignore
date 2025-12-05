@@ -99,6 +99,18 @@ ASALocalRun/
 [Ss]ecrets/
 user-secrets.json
 
+# Generated code coverage reports
+coverage-report/
+**/coverage-report/
+TestResults/
+
+# Build output directories (be explicit)
+[Bb]in/
+[Oo]bj/
+
+# Out directory (generated artifacts)
+out/
+
 # Local .env file
 .env
 .env.local
