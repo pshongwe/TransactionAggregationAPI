@@ -213,9 +213,9 @@ var assemblies = [
   {
     "name": "TransactionAggregation.Api",
     "classes": [
-      { "name": "TransactionAggregation.Api.Adapters.ASourceAdapter", "rp": "TransactionAggregation.Api_ASourceAdapter.html", "cl": 29, "ucl": 2, "cal": 31, "tl": 76, "cb": 15, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Adapters.BSourceAdapter", "rp": "TransactionAggregation.Api_BSourceAdapter.html", "cl": 29, "ucl": 2, "cal": 31, "tl": 76, "cb": 15, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Adapters.CSourceAdapter", "rp": "TransactionAggregation.Api_CSourceAdapter.html", "cl": 31, "ucl": 4, "cal": 35, "tl": 80, "cb": 14, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Adapters.ASourceAdapter", "rp": "TransactionAggregation.Api_ASourceAdapter.html", "cl": 30, "ucl": 1, "cal": 31, "tl": 76, "cb": 19, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Adapters.BSourceAdapter", "rp": "TransactionAggregation.Api_BSourceAdapter.html", "cl": 30, "ucl": 1, "cal": 31, "tl": 76, "cb": 21, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Adapters.CSourceAdapter", "rp": "TransactionAggregation.Api_CSourceAdapter.html", "cl": 34, "ucl": 1, "cal": 35, "tl": 80, "cb": 19, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Controllers.AuthController", "rp": "TransactionAggregation.Api_AuthController.html", "cl": 9, "ucl": 1, "cal": 10, "tl": 52, "cb": 2, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Controllers.TransactionsController", "rp": "TransactionAggregation.Api_TransactionsController.html", "cl": 12, "ucl": 2, "cal": 14, "tl": 114, "cb": 2, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Dtos.CategorySummaryDto", "rp": "TransactionAggregation.Api_CategorySummaryDto.html", "cl": 4, "ucl": 1, "cal": 5, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -233,7 +233,7 @@ var assemblies = [
     "classes": [
       { "name": "TransactionAggregation.Domain.Models.CategorySummary", "rp": "TransactionAggregation.Domain_CategorySummary.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 7, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Domain.Models.UnifiedTransaction", "rp": "TransactionAggregation.Domain_UnifiedTransaction.html", "cl": 10, "ucl": 0, "cal": 10, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Domain.Services.Categorizer", "rp": "TransactionAggregation.Domain_Categorizer.html", "cl": 20, "ucl": 1, "cal": 21, "tl": 38, "cb": 5, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Domain.Services.Categorizer", "rp": "TransactionAggregation.Domain_Categorizer.html", "cl": 21, "ucl": 0, "cal": 21, "tl": 38, "cb": 6, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Domain.Services.TransactionAggregationService", "rp": "TransactionAggregation.Domain_TransactionAggregationService.html", "cl": 26, "ucl": 1, "cal": 27, "tl": 66, "cb": 5, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
@@ -269,7 +269,7 @@ var riskHotspots = [
   {
     "assembly": "TransactionAggregation.Api", "class": "TransactionAggregation.Api.Adapters.CSourceAdapter", "reportPath": "TransactionAggregation.Api_CSourceAdapter.html", "methodName": "FetchAndNormalizeAsync()", "methodShortName": "FetchAndNormalizeAsync()", "fileIndex": 0, "line": 39,
     "metrics": [
-      { "value": 25, "exceeded": false },
+      { "value": 24, "exceeded": false },
       { "value": 24, "exceeded": true },
     ]},
 ];
