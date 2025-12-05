@@ -11,12 +11,13 @@ A **.NET 8** service that ingests customer transactions from heterogeneous upstr
 2. [Architecture](#architecture)
 3. [Getting Started](#getting-started)
 4. [Running Locally](#running-locally)
-5. [API Surface](#api-surface)
-6. [Testing & Coverage](#testing--coverage)
-7. [Deployment](#deployment)
-8. [Project Structure](#project-structure)
-9. [Contributing](#contributing)
-10. [Author](#author)
+5. [Generating Production API Tokens](#generating-production-api-tokens)
+6. [API Surface](#api-surface)
+7. [Testing & Coverage](#testing--coverage)
+8. [Deployment](#deployment)
+9. [Project Structure](#project-structure)
+10. [Contributing](#contributing)
+11. [Author](#author)
 
 ---
 
@@ -94,6 +95,35 @@ A **.NET 8** service that ingests customer transactions from heterogeneous upstr
   podman build -t transaction-aggregation-api .
   podman run -p 8080:8080 transaction-aggregation-api
   ```
+
+---
+
+## Generating Production API Tokens
+1. **Prerequisites**
+   - Ensure `ASPNETCORE_ENVIRONMENT=Production` and production secrets (for example, `AUTH_USERNAME`, `AUTH_PASSWORD`, `JWT__KEY`) are stored in your host's secret manager (Render environment variables, HashiCorp Vault, etc.).
+   - Confirm the public URL for the deployed API (e.g., `https://transactionaggregationapi.onrender.com`).
+2. **Load credentials into your shell**
+   ```bash
+   export AUTH_USERNAME="<prod-user>"
+   export AUTH_PASSWORD="<prod-pass>"
+   export PROD_API=https://transactionaggregationapi.onrender.com
+   ```
+   In Render, review the service's **Environment → Environment Variables** panel (or `render.yaml`) to copy the values, or use the Render CLI/API if you automate secret retrieval.
+3. **Request a token**
+   ```bash
+   curl -X POST "$PROD_API/auth/token" \
+     -H "Content-Type: application/json" \
+     -d "{ \"username\": \"$AUTH_USERNAME\", \"password\": \"$AUTH_PASSWORD\" }"
+   ```
+   The response contains `accessToken` and `expiresIn`—store the token temporarily only in secure tooling.
+4. **Verify the JWT**
+   - Decode the token with `jwt.io` or `dotnet user-jwts decode --token <token>` to confirm issuer, audience, and expiration align with production settings.
+   - Call a protected endpoint with the `Authorization: Bearer <token>` header, for example:
+     ```bash
+     curl "$PROD_API/customers/demo/transactions" \
+       -H "Authorization: Bearer <token>"
+     ```
+     Expect `200 OK`; `401` means the token is invalid or expired.
 
 ---
 
