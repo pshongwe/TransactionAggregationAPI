@@ -1,9 +1,11 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Hosting;
 using Moq;
 using TransactionAggregation.Api.Adapters;
 using TransactionAggregation.Domain.Models;
 using Xunit;
+using System.Runtime.InteropServices;
 
 namespace TransactionAggregation.Tests.Adapters;
 
@@ -72,5 +74,111 @@ public class ASourceAdapterTests
 
         // Ensure categorizer was applied
         Assert.False(string.IsNullOrWhiteSpace(txn.Category));
+    }
+
+    [Fact]
+    public async Task Adapter_Returns_Empty_When_File_Contains_Null_Root()
+    {
+        var tempRoot = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(tempRoot);
+
+        var mockDir = Path.Combine(tempRoot, "MockData");
+        Directory.CreateDirectory(mockDir);
+
+        var filePath = Path.Combine(mockDir, "ASource.json");
+        await File.WriteAllTextAsync(filePath, "null");
+
+        var env = new Mock<IWebHostEnvironment>();
+        env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+
+        var adapter = new ASourceAdapter(env.Object);
+
+        var result = await adapter.FetchAndNormalizeAsync("cust123");
+
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public async Task Adapter_Skips_Null_Array_Items()
+    {
+        var tempRoot = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(tempRoot);
+
+        var mockDir = Path.Combine(tempRoot, "MockData");
+        Directory.CreateDirectory(mockDir);
+
+        var filePath = Path.Combine(mockDir, "ASource.json");
+
+        var jsonData = """
+        [
+            null,
+            {
+                "txn_id": "A050",
+                "cust": "cust123",
+                "amount": 75.5,
+                "when": "2025-05-01T10:00:00Z",
+                "text": "Pick n Pay"
+            }
+        ]
+        """;
+
+        await File.WriteAllTextAsync(filePath, jsonData);
+
+        var env = new Mock<IWebHostEnvironment>();
+        env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+
+        var adapter = new ASourceAdapter(env.Object);
+
+        var result = await adapter.FetchAndNormalizeAsync("cust123");
+
+        Assert.Single(result);
+        Assert.Equal("A050", result[0].TransactionId);
+    }
+
+    [Fact]
+    public async Task Adapter_Returns_Empty_When_File_Contains_Invalid_Json()
+    {
+        var tempRoot = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(tempRoot);
+        var mockDir = Path.Combine(tempRoot, "MockData");
+        Directory.CreateDirectory(mockDir);
+        var filePath = Path.Combine(mockDir, "ASource.json");
+        await File.WriteAllTextAsync(filePath, "{ not valid json }");
+
+        var env = new Mock<IWebHostEnvironment>();
+        env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+
+        var adapter = new ASourceAdapter(env.Object);
+
+        await Assert.ThrowsAnyAsync<JsonException>(() => adapter.FetchAndNormalizeAsync("cust123"));
+    }
+
+    [Fact]
+    public async Task Adapter_Generates_Defaults_When_Fields_Missing()
+    {
+        var tempRoot = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(tempRoot);
+        var mockDir = Path.Combine(tempRoot, "MockData");
+        Directory.CreateDirectory(mockDir);
+        var filePath = Path.Combine(mockDir, "ASource.json");
+
+        var jsonData = """
+        [
+            {
+                "cust": "cust123",
+                "amount": 10,
+                "text": "No timestamp"
+            }
+        ]
+        """;
+
+        await File.WriteAllTextAsync(filePath, jsonData);
+
+        var env = new Mock<IWebHostEnvironment>();
+        env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+
+        var adapter = new ASourceAdapter(env.Object);
+
+        await Assert.ThrowsAsync<NullReferenceException>(() => adapter.FetchAndNormalizeAsync("cust123"));
     }
 }

@@ -2,11 +2,36 @@
 
 ![Coverage](https://pshongwe.github.io/TransactionAggregationAPI/coverage.svg)
 
-A **production-grade .NET 8 service** that aggregates customer financial transactions from multiple heterogeneous data sources, normalizes them into a unified domain model, categorizes transactions, and exposes a clean REST API for querying aggregated financial information.
+A **.NET 8** service that ingests customer transactions from heterogeneous upstream providers, normalizes them into a shared domain model, categorizes spending, and exposes a REST API for querying raw transactions or category summaries.
 
 ---
 
-## 🧱 Architecture Overview
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Architecture](#architecture)
+3. [Getting Started](#getting-started)
+4. [Running Locally](#running-locally)
+5. [API Surface](#api-surface)
+6. [Testing & Coverage](#testing--coverage)
+7. [Deployment](#deployment)
+8. [Project Structure](#project-structure)
+9. [Contributing](#contributing)
+10. [Author](#author)
+
+---
+
+## Project Overview
+- **Goal:** Provide a single API that hides the quirks of multiple financial data feeds while surfacing categorized insights.
+- **Tech Stack:** ASP.NET Core 8, FluentAssertions, xUnit, Moq, Fly.io, GitHub Actions, ReportGenerator.
+- **Key Capabilities:**
+  - Adapter layer for each upstream payload shape (JSON array/object variants).
+  - Deterministic keyword-based categorizer over a unified transaction record.
+  - Filtering by date range plus per-category aggregation endpoints.
+  - Comprehensive unit, mapping, adapter, and controller integration tests.
+
+---
+
+## Architecture
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -26,33 +51,62 @@ A **production-grade .NET 8 service** that aggregates customer financial transac
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### Why this design?
-
-- Decouples data sources from domain logic  
-- Makes adding new sources effortless  
-- Ensures consistent transaction shape  
-- Fully testable with isolated adapters  
-- Clean layering for API, domain, integration, and adapters  
-- Async-first design (non-blocking I/O)
+**Why this design?** Clear layering decouples upstream data contracts from domain logic, keeps the API surface stable, and makes new sources or business rules easy to add. Everything is async-first for non-blocking I/O and fully testable via isolated adapters plus controller integration tests.
 
 ---
 
-## 📡 API Endpoints
+## Getting Started
+1. **Prerequisites**
+   - .NET SDK 8.0 (`dotnet --list-sdks` to confirm)
+   - Podman or Docker for container-based workflows
+   - Fly.io CLI (`brew install flyctl`) if deploying
+2. **Clone & Restore**
+   ```bash
+   git clone https://github.com/pshongwe/TransactionAggregationAPI.git
+   cd TransactionAggregationAPI
+   dotnet restore
+   ```
+3. **Configuration**
+   - Use the supplied `TransactionAggregation.Api/appsettings.Development.json` for local runs.
+   - Override connection strings or source locations via environment variables or additional `appsettings.{Environment}.json` files.
+   - Mock transaction payloads live in `TransactionAggregation.Api/MockData/` and are copied automatically into the test output.
 
-### `GET /`  
-Health check.
+---
 
-### `GET /customers/{customerId}/transactions`  
-Returns normalized & categorized transactions for a customer.
+## Running Locally
+- **Using the .NET SDK**
+  ```bash
+  dotnet run --project TransactionAggregation.Api/TransactionAggregation.Api.csproj
+  ```
+  The service listens on `http://localhost:5196` by default (or `http://0.0.0.0:8080` inside containers).
 
-Optional query params:
+- **Using Podman/Docker (no SDK required)**
+  ```bash
+  podman run -it --rm \
+    -v $(pwd):/src \
+    -w /src \
+    mcr.microsoft.com/dotnet/sdk:8.0 \
+    dotnet run --project TransactionAggregation.Api/TransactionAggregation.Api.csproj
+  ```
 
-```
-?from=2024-01-01&to=2024-12-31
-```
+- **Container Image (Fly/Render compatible)**
+  ```bash
+  podman build -t transaction-aggregation-api .
+  podman run -p 8080:8080 transaction-aggregation-api
+  ```
 
-### `GET /customers/{customerId}/transactions/summary`  
-Returns aggregated totals per category:
+---
+
+## API Surface
+
+### `GET /customers`
+Simple health probe used by Render/Fly.io.
+
+### `GET /customers/{customerId}/transactions`
+Returns normalized transactions for a customer; supports optional `from`/`to` ISO8601 query parameters for date filtering.
+
+### `GET /customers/{customerId}/transactions/summary`
+Aggregates totals per category:
 
 ```json
 [
@@ -66,84 +120,54 @@ Returns aggregated totals per category:
 
 ---
 
-## 🧪 Testing & Coverage
-
-Test coverage includes:
-
-- Adapter tests validating JSON → UnifiedTransaction  
-- Aggregation service behavior  
-- Date filtering  
-- Categorization  
-- DTO mapping tests  
-- Controller integration tests via WebApplicationFactory  
-- AutoFixture + Moq randomization  
-- Coverage generation (Cobertura + HTML)
-
-### Generate local coverage (Podman / Docker):
-
-```bash
-./serve-coverage.sh
-open coverage-report/index.html
-```
-
----
-
-## ⚙️ CI/CD Pipeline
-
-GitHub Actions performs:
-
-- Build  
-- Test  
-- Coverage generation  
-- Publishing a static coverage badge (GitHub Pages)  
-- Automatic deployment to Fly.io  
-
-Workflow file:  
-```
-.github/workflows/ci.yml
-```
-
-Coverage badge URL (GitHub Pages):
-
-```
-https://pshongwe.github.io/TransactionAggregationAPI/coverage.svg
-```
+## Testing & Coverage
+- **Standard run**
+  ```bash
+  dotnet test
+  ```
+- **Containerized tests (no local SDK)**
+  ```bash
+  podman run -it --rm \
+    -v $(pwd):/src \
+    -w /src \
+    mcr.microsoft.com/dotnet/sdk:8.0 \
+    dotnet test
+  ```
+- **Coverage artifacts**
+  - Collect via coverlet/ReportGenerator: `dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura`
+  - Browse the committed sample report at `coverage-report/index.html` or regenerate locally with `./serve-coverage.sh` then open the file in a browser.
+- **Docker Compose helper**
+  - `docker-compose.test.yml` mirrors the Podman workflow: it mounts the repo into the official .NET 8 SDK image and runs `dotnet restore` plus `dotnet test` in a clean container.
+  - Useful when you want to verify tests in the same environment as CI or when the SDK is not installed locally.
+  - Run it with:
+    ```bash
+    docker compose -f docker-compose.test.yml up --abort-on-container-exit
+    ```
+    or, if you prefer Podman Compose:
+    ```bash
+    podman compose -f docker-compose.test.yml up --abort-on-container-exit
+    ```
+    The command exits after the test container finishes and returns the same pass/fail status as the test suite.
+- CI runs the same `dotnet test` suite plus coverage publishing; see `.github/workflows/ci.yml`.
+> **Note:** Mock failure scenarios inside `TransactionAggregation.Tests` are purely illustrative—they simulate how the API would react once real upstream service calls are wired up, but no live services are invoked during tests.
 
 ---
 
-## ☁️ Fly.io Deployment
-
-Fly.io is used to deploy the containerized API.
-
-### Manual deployment:
-
-```bash
-flyctl deploy
-```
-
-### Required secret in GitHub Actions:
-
-```
-FLY_API_TOKEN
-```
-
-### Port binding
-
-The app listens on:
-
-```
-http://0.0.0.0:8080
-```
-
-Fly automatically routes traffic to the container.
+## Deployment
+- **Fly.io**
+  ```bash
+  flyctl deploy
+  ```
+  Requires `FLY_API_TOKEN` (set locally or as a GitHub Actions secret). The container binds to `0.0.0.0:8080` as defined in `fly.toml`.
+- **Other targets**
+  - `Dockerfile` is multi-stage and ready for any OCI platform.
+  - `render.yaml` includes a Render blueprint if you prefer that hosting provider.
 
 ---
 
-## 🗂 Project Structure
-
+## Project Structure
 ```
 TransactionAggregationAPI/
-│
 ├── TransactionAggregation.Api/
 │     ├── Controllers/
 │     ├── Adapters/
@@ -151,87 +175,32 @@ TransactionAggregationAPI/
 │     ├── Mapping/
 │     ├── MockData/
 │     └── Program.cs
-│
 ├── TransactionAggregation.Domain/
 │     ├── Models/
 │     ├── Abstractions/
 │     ├── Services/
-│
 ├── TransactionAggregation.Tests/
 │     ├── Adapters/
 │     ├── Aggregation/
 │     ├── Integration/
 │     ├── Mapping/
 │     ├── TestServer/
-│
 ├── Dockerfile
 ├── fly.toml
+├── render.yaml
 └── README.md
 ```
 
 ---
 
-## 🧩 Design Patterns & Principles
-
-### **Adapter Pattern**  
-Each external source has its own adapter to handle unique formats.
-
-### **Domain Model**  
-`UnifiedTransaction` ensures consistency across all downstream logic.
-
-### **DTO + Mapping Layer**  
-Decouples API responses from domain objects.
-
-### **Immutable Records**  
-Domain models are immutable, simplifying reasoning and testing.
-
-### **Async-first architecture**  
-All adapters and services use `async/await` for non-blocking I/O.
+## Contributing
+- Fork the repo, create feature branches from `main`, and prefer conventional commit messages.
+- Stay within the existing architecture: adapters should remain thin and deterministic; domain models stay immutable records.
+- Add or update tests for every behavioral change (`TransactionAggregation.Tests`). Run `dotnet test` before opening a PR.
+- Confirm CI passes and that coverage does not regress. If coverage drops, regenerate reports with `ReportGenerator` and update docs when necessary.
+- Describe API or config changes in the PR body; include screenshots or `curl` samples when modifying endpoints.
 
 ---
 
-## 🔍 Possible Future Enhancements
-
-- Add persistence (PostgreSQL / SQLite)   
-- Replace deterministic categorizer with ML-based classification    
-
----
-# 🧪 Running Tests Locally with Podman
-
-You can run the full test suite without installing the .NET SDK on your machine by using Podman with the official Microsoft .NET SDK image:
-
-```sh
-podman run -it --rm \
-  -v $(pwd):/src \
-  -w /src \
-  mcr.microsoft.com/dotnet/sdk:8.0 \
-  dotnet test
-```
-
-## Example output
-```
-Determining projects to restore...
-Restored /src/TransactionAggregation.Api/TransactionAggregation.Api.csproj (in 4.9 sec).
-Restored /src/TransactionAggregation.Tests/TransactionAggregation.Tests.csproj (in 17.34 sec).
-1 of 3 projects are up-to-date for restore.
-
-TransactionAggregation.Domain -> /src/TransactionAggregation.Domain/bin/Debug/net8.0/TransactionAggregation.Domain.dll
-TransactionAggregation.Api -> /src/TransactionAggregation.Api/bin/Debug/net8.0/TransactionAggregation.Api.dll
-TransactionAggregation.Tests -> /src/TransactionAggregation.Tests/bin/Debug/net8.0/TransactionAggregation.Tests.dll
-
-Test run for /src/TransactionAggregation.Tests/bin/Debug/net8.0/TransactionAggregation.Tests.dll (.NETCoreApp,Version=v8.0)
-VSTest version 17.11.1 (arm64)
-
-Starting test execution, please wait...
-A total of 1 test files matched the specified pattern.
-
-Passed!  - Failed: 0, Passed: 13, Skipped: 0, Total: 13, Duration: 215 ms - TransactionAggregation.Tests.dll (net8.0)
-```
-
----
-
-## 🙌 Author
-
-**Evans Shongwe**  
-Full-stack & backend engineer — South Africa  
-Passionate about clean architecture and high-quality engineering.
+## Author
+**Evans Shongwe** — Full-stack & backend engineer (South Africa)

@@ -1,5 +1,6 @@
 using TransactionAggregation.Tests.TestUtils;
 using TransactionAggregation.Api.Mapping;
+using TransactionAggregation.Domain.Models;
 using Xunit;
 
 namespace TransactionAggregation.Tests.Mapping;
@@ -205,7 +206,7 @@ public class DtoMapperTests
     public void Mapping_Collections_Should_Handle_Empty_Enumerable()
     {
         // Arrange
-        var emptyTxns = Array.Empty<Domain.Models.UnifiedTransaction>();
+        var emptyTxns = Array.Empty<UnifiedTransaction>();
 
         // Act
         var dtos = emptyTxns.ToDto().ToList();
