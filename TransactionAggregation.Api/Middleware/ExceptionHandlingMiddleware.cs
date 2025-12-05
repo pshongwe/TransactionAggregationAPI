@@ -3,17 +3,30 @@ using System.Text.Json;
 
 namespace TransactionAggregation.Api.Middleware;
 
+/// <summary>
+/// Middleware for handling global exceptions and providing consistent error responses.
+/// </summary>
 public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ExceptionHandlingMiddleware"/> class.
+    /// </summary>
+    /// <param name="next">The next middleware in the pipeline.</param>
+    /// <param name="logger">The logger instance.</param>
     public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
     {
         _next = next;
         _logger = logger;
     }
 
+    /// <summary>
+    /// Invokes the middleware to process the HTTP request and handle exceptions.
+    /// </summary>
+    /// <param name="context">The HTTP context.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -66,9 +79,23 @@ public class ExceptionHandlingMiddleware
     }
 }
 
+/// <summary>
+/// Represents an error response returned by the API.
+/// </summary>
 public class ErrorResponse
 {
+    /// <summary>
+    /// Gets or sets the error message.
+    /// </summary>
     public string Message { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the HTTP status code.
+    /// </summary>
     public HttpStatusCode StatusCode { get; set; }
+
+    /// <summary>
+    /// Gets or sets the timestamp when the error occurred.
+    /// </summary>
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 }

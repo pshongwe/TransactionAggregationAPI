@@ -19,7 +19,7 @@ public class HealthCheckTests : IClassFixture<CustomWebApplicationFactory>
     {
         var client = _factory.CreateClient();
 
-        var response = await client.GetAsync("/customers/C1");
+        var response = await client.GetAsync("/customers");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 
         var body = await response.Content.ReadAsStringAsync();
