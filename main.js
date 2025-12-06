@@ -213,21 +213,21 @@ var assemblies = [
   {
     "name": "TransactionAggregation.Api",
     "classes": [
-      { "name": "TransactionAggregation.Api.Adapters.ASourceAdapter", "rp": "TransactionAggregation.Api_ASourceAdapter.html", "cl": 30, "ucl": 1, "cal": 31, "tl": 76, "cb": 19, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Adapters.BSourceAdapter", "rp": "TransactionAggregation.Api_BSourceAdapter.html", "cl": 30, "ucl": 1, "cal": 31, "tl": 76, "cb": 21, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Adapters.CSourceAdapter", "rp": "TransactionAggregation.Api_CSourceAdapter.html", "cl": 34, "ucl": 1, "cal": 35, "tl": 80, "cb": 19, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Adapters.ASourceAdapter", "rp": "TransactionAggregation.Api_ASourceAdapter.html", "cl": 33, "ucl": 2, "cal": 35, "tl": 87, "cb": 20, "tb": 26, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Adapters.BSourceAdapter", "rp": "TransactionAggregation.Api_BSourceAdapter.html", "cl": 33, "ucl": 2, "cal": 35, "tl": 87, "cb": 22, "tb": 26, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Adapters.CSourceAdapter", "rp": "TransactionAggregation.Api_CSourceAdapter.html", "cl": 37, "ucl": 2, "cal": 39, "tl": 91, "cb": 20, "tb": 26, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Controllers.AuthController", "rp": "TransactionAggregation.Api_AuthController.html", "cl": 9, "ucl": 1, "cal": 10, "tl": 52, "cb": 2, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Controllers.TransactionsController", "rp": "TransactionAggregation.Api_TransactionsController.html", "cl": 12, "ucl": 2, "cal": 14, "tl": 114, "cb": 2, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Controllers.TransactionsController", "rp": "TransactionAggregation.Api_TransactionsController.html", "cl": 35, "ucl": 4, "cal": 39, "tl": 162, "cb": 20, "tb": 28, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Dtos.CategorySummaryDto", "rp": "TransactionAggregation.Api_CategorySummaryDto.html", "cl": 4, "ucl": 1, "cal": 5, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Dtos.TransactionDto", "rp": "TransactionAggregation.Api_TransactionDto.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Mapping.DtoMappers", "rp": "TransactionAggregation.Api_DtoMappers.html", "cl": 10, "ucl": 0, "cal": 10, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Middleware.ErrorResponse", "rp": "TransactionAggregation.Api_ErrorResponse.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 101, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Middleware.ExceptionHandlingMiddleware", "rp": "TransactionAggregation.Api_ExceptionHandlingMiddleware.html", "cl": 7, "ucl": 22, "cal": 29, "tl": 101, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Program", "rp": "TransactionAggregation.Api_Program.html", "cl": 68, "ucl": 0, "cal": 68, "tl": 110, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Security.CorrelationIdProvider", "rp": "TransactionAggregation.Api_CorrelationIdProvider.html", "cl": 6, "ucl": 3, "cal": 9, "tl": 210, "cb": 3, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Middleware.ErrorResponse", "rp": "TransactionAggregation.Api_ErrorResponse.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 116, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Middleware.ExceptionHandlingMiddleware", "rp": "TransactionAggregation.Api_ExceptionHandlingMiddleware.html", "cl": 11, "ucl": 24, "cal": 35, "tl": 116, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Program", "rp": "TransactionAggregation.Api_Program.html", "cl": 77, "ucl": 0, "cal": 77, "tl": 119, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Security.CorrelationIdProvider", "rp": "TransactionAggregation.Api_CorrelationIdProvider.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 210, "cb": 5, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Security.JwtTokenService", "rp": "TransactionAggregation.Api_JwtTokenService.html", "cl": 22, "ucl": 1, "cal": 23, "tl": 74, "cb": 5, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TransactionAggregation.Api.Security.SecurityExtensions", "rp": "TransactionAggregation.Api_SecurityExtensions.html", "cl": 99, "ucl": 15, "cal": 114, "tl": 210, "cb": 2, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TransactionAggregation.Api.Services.CachedTransactionAggregationService", "rp": "TransactionAggregation.Api_CachedTransactionAggregationService.html", "cl": 50, "ucl": 5, "cal": 55, "tl": 135, "cb": 16, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TransactionAggregation.Api.Services.CachedTransactionAggregationService", "rp": "TransactionAggregation.Api_CachedTransactionAggregationService.html", "cl": 87, "ucl": 7, "cal": 94, "tl": 198, "cb": 22, "tb": 32, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "TransactionAggregation.Domain",
@@ -250,25 +250,25 @@ var riskHotspotMetrics = [
 
 var riskHotspots = [
   {
-    "assembly": "TransactionAggregation.Api", "class": "TransactionAggregation.Api.Middleware.ExceptionHandlingMiddleware", "reportPath": "TransactionAggregation.Api_ExceptionHandlingMiddleware.html", "methodName": "HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)", "methodShortName": "HandleExceptionAsync(...)", "fileIndex": 0, "line": 45,
+    "assembly": "TransactionAggregation.Api", "class": "TransactionAggregation.Api.Middleware.ExceptionHandlingMiddleware", "reportPath": "TransactionAggregation.Api_ExceptionHandlingMiddleware.html", "methodName": "HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,System.String)", "methodShortName": "HandleExceptionAsync(...)", "fileIndex": 0, "line": 54,
     "metrics": [
       { "value": 72, "exceeded": true },
       { "value": 8, "exceeded": false },
     ]},
   {
-    "assembly": "TransactionAggregation.Api", "class": "TransactionAggregation.Api.Adapters.ASourceAdapter", "reportPath": "TransactionAggregation.Api_ASourceAdapter.html", "methodName": "FetchAndNormalizeAsync()", "methodShortName": "FetchAndNormalizeAsync()", "fileIndex": 0, "line": 39,
+    "assembly": "TransactionAggregation.Api", "class": "TransactionAggregation.Api.Adapters.ASourceAdapter", "reportPath": "TransactionAggregation.Api_ASourceAdapter.html", "methodName": "FetchAndNormalizeAsync()", "methodShortName": "FetchAndNormalizeAsync()", "fileIndex": 0, "line": 43,
     "metrics": [
       { "value": 24, "exceeded": false },
       { "value": 24, "exceeded": true },
     ]},
   {
-    "assembly": "TransactionAggregation.Api", "class": "TransactionAggregation.Api.Adapters.BSourceAdapter", "reportPath": "TransactionAggregation.Api_BSourceAdapter.html", "methodName": "FetchAndNormalizeAsync()", "methodShortName": "FetchAndNormalizeAsync()", "fileIndex": 0, "line": 39,
+    "assembly": "TransactionAggregation.Api", "class": "TransactionAggregation.Api.Adapters.BSourceAdapter", "reportPath": "TransactionAggregation.Api_BSourceAdapter.html", "methodName": "FetchAndNormalizeAsync()", "methodShortName": "FetchAndNormalizeAsync()", "fileIndex": 0, "line": 43,
     "metrics": [
       { "value": 24, "exceeded": false },
       { "value": 24, "exceeded": true },
     ]},
   {
-    "assembly": "TransactionAggregation.Api", "class": "TransactionAggregation.Api.Adapters.CSourceAdapter", "reportPath": "TransactionAggregation.Api_CSourceAdapter.html", "methodName": "FetchAndNormalizeAsync()", "methodShortName": "FetchAndNormalizeAsync()", "fileIndex": 0, "line": 39,
+    "assembly": "TransactionAggregation.Api", "class": "TransactionAggregation.Api.Adapters.CSourceAdapter", "reportPath": "TransactionAggregation.Api_CSourceAdapter.html", "methodName": "FetchAndNormalizeAsync()", "methodShortName": "FetchAndNormalizeAsync()", "fileIndex": 0, "line": 43,
     "metrics": [
       { "value": 24, "exceeded": false },
       { "value": 24, "exceeded": true },
