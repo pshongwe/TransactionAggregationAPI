@@ -127,7 +127,7 @@ A **.NET 8** service that ingests customer transactions from heterogeneous upstr
    - Decode the token with `jwt.io` or `dotnet user-jwts decode --token <token>` to confirm issuer, audience, and expiration align with production settings.
    - Call a protected endpoint with the `Authorization: Bearer <token>` header, for example:
      ```bash
-     curl "$PROD_API/customers/demo/transactions" \
+     curl "$PROD_API/customers/C1/transactions" \
        -H "Authorization: Bearer <token>"
      ```
      Expect `200 OK`; `401` means the token is invalid or expired.
