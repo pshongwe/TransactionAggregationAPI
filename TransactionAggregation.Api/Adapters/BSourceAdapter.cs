@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using System.Text.Json.Nodes;
 using TransactionAggregation.Domain.Abstractions;
 using TransactionAggregation.Domain.Models;
@@ -16,14 +17,17 @@ public sealed class BSourceAdapter : ITransactionSourceAdapter
     public string SourceName => "BSource";
 
     private readonly string _filePath;
+    private readonly ILogger<BSourceAdapter> _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BSourceAdapter"/> class.
     /// </summary>
     /// <param name="env">The web host environment.</param>
-    public BSourceAdapter(IWebHostEnvironment env)
+    /// <param name="logger">The logger.</param>
+    public BSourceAdapter(IWebHostEnvironment env, ILogger<BSourceAdapter> logger)
     {
         _filePath = Path.Combine(env.ContentRootPath, "MockData", "BSource.json");
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     /// <summary>
@@ -37,12 +41,18 @@ public sealed class BSourceAdapter : ITransactionSourceAdapter
         CancellationToken ct = default)
     {
         if (!File.Exists(_filePath))
+        {
+            _logger.LogWarning("BSource data file missing at {FilePath}", _filePath);
             return Array.Empty<UnifiedTransaction>();
+        }
 
         var json = await File.ReadAllTextAsync(_filePath, ct);
         var root = JsonNode.Parse(json)?.AsArray();
         if (root is null)
+        {
+            _logger.LogWarning("BSource payload at {FilePath} was empty or invalid JSON", _filePath);
             return Array.Empty<UnifiedTransaction>();
+        }
 
         var list = new List<UnifiedTransaction>();
 
@@ -71,6 +81,7 @@ public sealed class BSourceAdapter : ITransactionSourceAdapter
             ));
         }
 
+        _logger.LogInformation("BSource returned {Count} transactions for {CustomerId}", list.Count, customerId);
         return list;
     }
 }

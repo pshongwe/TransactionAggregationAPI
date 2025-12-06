@@ -241,3 +241,11 @@ TransactionAggregationAPI/
 
 ## Author
 **Evans Shongwe** — Full-stack & backend engineer (South Africa)
+
+---
+
+## Observability
+- **Structured logs:** Controllers, adapters, and the cache decorator log at Information level by default, so you can tail the console or forward to your logging stack to see cache hits/misses, adapter counts, and controller request envelopes (including `X-Correlation-ID`).
+- **Correlation IDs:** Every request is stamped with `X-Correlation-ID`; the exception middleware echoes it in error payloads. When reporting bugs, capture this ID to trace logs end-to-end.
+- **Metrics:** `CachedTransactionAggregationService` emits `transaction_cache_hits` and `transaction_cache_misses` counters via `System.Diagnostics.Metrics`. Hook them into OpenTelemetry/Prometheus by adding the appropriate exporter, then chart cache hit ratios or alert on miss spikes.
+- **Adapters:** When any mock source file is missing or malformed, the adapter logs a warning and short-circuits, making upstream data issues visible without stepping through code.

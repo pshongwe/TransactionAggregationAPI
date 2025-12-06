@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.Extensions.Logging;
 using TransactionAggregation.Domain.Abstractions;
 using TransactionAggregation.Api.Dtos;
 using TransactionAggregation.Api.Mapping;
+using TransactionAggregation.Api.Services;
+using TransactionAggregation.Api.Security;
 
 namespace TransactionAggregation.Api.Controllers;
 
@@ -15,14 +18,23 @@ namespace TransactionAggregation.Api.Controllers;
 public class TransactionsController : ControllerBase
 {
     private readonly ITransactionAggregationService _svc;
+    private readonly ILogger<TransactionsController> _logger;
+    private readonly ICorrelationIdProvider _correlationIdProvider;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TransactionsController"/> class.
     /// </summary>
     /// <param name="svc">The transaction aggregation service.</param>
-    public TransactionsController(ITransactionAggregationService svc)
+    /// <param name="logger">The logger instance.</param>
+    /// <param name="correlationIdProvider">The correlation ID provider.</param>
+    public TransactionsController(
+        ITransactionAggregationService svc,
+        ILogger<TransactionsController> logger,
+        ICorrelationIdProvider correlationIdProvider)
     {
         _svc = svc;
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _correlationIdProvider = correlationIdProvider ?? throw new ArgumentNullException(nameof(correlationIdProvider));
     }
 
     /// <summary>
@@ -71,7 +83,25 @@ public class TransactionsController : ControllerBase
         if (string.IsNullOrWhiteSpace(customerId))
             return BadRequest("customerId cannot be empty.");
 
+        var correlationId = _correlationIdProvider.GetCorrelationId(HttpContext);
+        _logger.LogInformation(
+            "Fetching transactions for {CustomerId} from {From} to {To} (cid: {CorrelationId})",
+            customerId,
+            from?.ToString("O") ?? "none",
+            to?.ToString("O") ?? "none",
+            correlationId);
+
         var txns = await _svc.GetAllAsync(customerId, from, to, ct);
+
+        if (txns.Count == 0)
+        {
+            _logger.LogWarning("No transactions found for {CustomerId} in requested window (cid: {CorrelationId})", customerId, correlationId);
+        }
+        else
+        {
+            _logger.LogInformation("Returning {Count} transactions for {CustomerId} (cid: {CorrelationId})", txns.Count, customerId, correlationId);
+        }
+
         return Ok(txns.ToDto());
     }
 
@@ -108,7 +138,25 @@ public class TransactionsController : ControllerBase
         if (string.IsNullOrWhiteSpace(customerId))
             return BadRequest("customerId cannot be empty.");
 
+        var correlationId = _correlationIdProvider.GetCorrelationId(HttpContext);
+        _logger.LogInformation(
+            "Fetching summary for {CustomerId} from {From} to {To} (cid: {CorrelationId})",
+            customerId,
+            from?.ToString("O") ?? "none",
+            to?.ToString("O") ?? "none",
+            correlationId);
+
         var summary = await _svc.GetCategorySummaryAsync(customerId, from, to, ct);
+
+        if (summary.Count == 0)
+        {
+            _logger.LogWarning("Summary result empty for {CustomerId} in requested window (cid: {CorrelationId})", customerId, correlationId);
+        }
+        else
+        {
+            _logger.LogInformation("Returning {Count} summary rows for {CustomerId} (cid: {CorrelationId})", summary.Count, customerId, correlationId);
+        }
+
         return Ok(summary);
     }
 }

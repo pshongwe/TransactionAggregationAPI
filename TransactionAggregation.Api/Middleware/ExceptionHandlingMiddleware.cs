@@ -1,5 +1,7 @@
 using System.Net;
 using System.Text.Json;
+using TransactionAggregation.Api.Security;
+using TransactionAggregation.Api.Services;
 
 namespace TransactionAggregation.Api.Middleware;
 
@@ -10,16 +12,22 @@ public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+    private readonly ICorrelationIdProvider _correlationIdProvider;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExceptionHandlingMiddleware"/> class.
     /// </summary>
     /// <param name="next">The next middleware in the pipeline.</param>
     /// <param name="logger">The logger instance.</param>
-    public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
+    /// <param name="correlationIdProvider">The correlation ID provider.</param>
+    public ExceptionHandlingMiddleware(
+        RequestDelegate next,
+        ILogger<ExceptionHandlingMiddleware> logger,
+        ICorrelationIdProvider correlationIdProvider)
     {
         _next = next;
         _logger = logger;
+        _correlationIdProvider = correlationIdProvider;
     }
 
     /// <summary>
@@ -35,19 +43,21 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unhandled exception occurred: {ExceptionMessage}", ex.Message);
-            await HandleExceptionAsync(context, ex);
+            var correlationId = _correlationIdProvider.GetCorrelationId(context);
+            _logger.LogError(ex, "Unhandled exception for {Path} (cid: {CorrelationId})", context.Request.Path, correlationId);
+            await HandleExceptionAsync(context, ex, correlationId);
         }
     }
 
-    private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+    private static Task HandleExceptionAsync(HttpContext context, Exception exception, string correlationId)
     {
         context.Response.ContentType = "application/json";
 
         var response = new ErrorResponse
         {
             Message = "An error occurred while processing your request",
-            StatusCode = HttpStatusCode.InternalServerError
+            StatusCode = HttpStatusCode.InternalServerError,
+            CorrelationId = correlationId
         };
 
         switch (exception)
@@ -98,4 +108,9 @@ public class ErrorResponse
     /// Gets or sets the timestamp when the error occurred.
     /// </summary>
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+
+    /// <summary>
+    /// Gets or sets the correlation identifier for tracing.
+    /// </summary>
+    public string CorrelationId { get; set; } = string.Empty;
 }

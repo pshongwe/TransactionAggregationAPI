@@ -77,9 +77,18 @@ public partial class Program
         builder.Services.AddHealthChecks();
 
         // Domain services
-        builder.Services.AddSingleton<ITransactionSourceAdapter, ASourceAdapter>();
-        builder.Services.AddSingleton<ITransactionSourceAdapter, BSourceAdapter>();
-        builder.Services.AddSingleton<ITransactionSourceAdapter, CSourceAdapter>();
+        builder.Services.AddSingleton<ITransactionSourceAdapter>(sp =>
+            new ASourceAdapter(
+                sp.GetRequiredService<IWebHostEnvironment>(),
+                sp.GetRequiredService<ILogger<ASourceAdapter>>()));
+        builder.Services.AddSingleton<ITransactionSourceAdapter>(sp =>
+            new BSourceAdapter(
+                sp.GetRequiredService<IWebHostEnvironment>(),
+                sp.GetRequiredService<ILogger<BSourceAdapter>>()));
+        builder.Services.AddSingleton<ITransactionSourceAdapter>(sp =>
+            new CSourceAdapter(
+                sp.GetRequiredService<IWebHostEnvironment>(),
+                sp.GetRequiredService<ILogger<CSourceAdapter>>()));
         builder.Services.AddScoped<ITransactionAggregationService, TransactionAggregationService>();
         builder.Services.Decorate<ITransactionAggregationService, CachedTransactionAggregationService>();
         builder.Services.AddMemoryCache();

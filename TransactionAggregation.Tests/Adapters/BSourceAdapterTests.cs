@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 using Moq;
 using TransactionAggregation.Api.Adapters;
 using TransactionAggregation.Domain.Models;
@@ -47,8 +48,9 @@ public class BSourceAdapterTests
         // Mock IWebHostEnvironment
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<BSourceAdapter>>();
 
-        var adapter = new BSourceAdapter(env.Object);
+        var adapter = new BSourceAdapter(env.Object, logger.Object);
 
         // Act
         var result = await adapter.FetchAndNormalizeAsync(customerId);
@@ -83,8 +85,9 @@ public class BSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<BSourceAdapter>>();
 
-        var adapter = new BSourceAdapter(env.Object);
+        var adapter = new BSourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("cust789");
 
@@ -118,8 +121,9 @@ public class BSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<BSourceAdapter>>();
 
-        var adapter = new BSourceAdapter(env.Object);
+        var adapter = new BSourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("cust789");
 
@@ -154,8 +158,9 @@ public class BSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<BSourceAdapter>>();
 
-        var adapter = new BSourceAdapter(env.Object);
+        var adapter = new BSourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("cust789");
 
@@ -187,8 +192,9 @@ public class BSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<BSourceAdapter>>();
 
-        var adapter = new BSourceAdapter(env.Object);
+        var adapter = new BSourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("cust789");
 
@@ -218,8 +224,9 @@ public class BSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<BSourceAdapter>>();
 
-        var adapter = new BSourceAdapter(env.Object);
+        var adapter = new BSourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("cust789");
 

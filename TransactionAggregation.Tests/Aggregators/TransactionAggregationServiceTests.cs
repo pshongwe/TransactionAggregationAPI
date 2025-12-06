@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using TransactionAggregation.Api.Adapters;
 using TransactionAggregation.Domain.Abstractions;
 using TransactionAggregation.Domain.Services;
@@ -11,12 +13,13 @@ public class TransactionAggregationServiceTests
     private static ITransactionAggregationService BuildService()
     {
         var env = EnvironmentMocks.CreateMockEnv(Directory.GetCurrentDirectory());
+        var loggerFactory = LoggerFactory.Create(builder => builder.AddProvider(new NullLoggerProvider()));
 
         ITransactionSourceAdapter[] sources =
         {
-            new ASourceAdapter(env),
-            new BSourceAdapter(env),
-            new CSourceAdapter(env)
+            new ASourceAdapter(env, loggerFactory.CreateLogger<ASourceAdapter>()),
+            new BSourceAdapter(env, loggerFactory.CreateLogger<BSourceAdapter>()),
+            new CSourceAdapter(env, loggerFactory.CreateLogger<CSourceAdapter>())
         };
 
         return new TransactionAggregationService(sources);
@@ -67,5 +70,13 @@ public class TransactionAggregationServiceTests
             Assert.True(txn.Timestamp >= from);
             Assert.True(txn.Timestamp <= to);
         });
+    }
+
+    private sealed class NullLoggerProvider : ILoggerProvider
+    {
+        public ILogger CreateLogger(string categoryName) => NullLogger.Instance;
+        public void Dispose()
+        {
+        }
     }
 }

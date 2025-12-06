@@ -6,6 +6,7 @@ using TransactionAggregation.Api.Adapters;
 using TransactionAggregation.Domain.Models;
 using Xunit;
 using System.Runtime.InteropServices;
+using Microsoft.Extensions.Logging;
 
 namespace TransactionAggregation.Tests.Adapters;
 
@@ -51,10 +52,11 @@ public class ASourceAdapterTests
 
         // Mock environment
         var env = new Mock<IWebHostEnvironment>();
-        env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        env.SetupGet(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<ASourceAdapter>>();
 
         // Adapter under test
-        var adapter = new ASourceAdapter(env.Object);
+        var adapter = new ASourceAdapter(env.Object, logger.Object);
 
         // Act
         var result = await adapter.FetchAndNormalizeAsync(customerId);
@@ -90,8 +92,9 @@ public class ASourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<ASourceAdapter>>();
 
-        var adapter = new ASourceAdapter(env.Object);
+        var adapter = new ASourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("cust123");
 
@@ -126,8 +129,9 @@ public class ASourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<ASourceAdapter>>();
 
-        var adapter = new ASourceAdapter(env.Object);
+        var adapter = new ASourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("cust123");
 
@@ -147,8 +151,9 @@ public class ASourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<ASourceAdapter>>();
 
-        var adapter = new ASourceAdapter(env.Object);
+        var adapter = new ASourceAdapter(env.Object, logger.Object);
 
         await Assert.ThrowsAnyAsync<JsonException>(() => adapter.FetchAndNormalizeAsync("cust123"));
     }
@@ -176,8 +181,9 @@ public class ASourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<ASourceAdapter>>();
 
-        var adapter = new ASourceAdapter(env.Object);
+        var adapter = new ASourceAdapter(env.Object, logger.Object);
 
         await Assert.ThrowsAsync<NullReferenceException>(() => adapter.FetchAndNormalizeAsync("cust123"));
     }

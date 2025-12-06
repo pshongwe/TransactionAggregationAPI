@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 using Moq;
 using TransactionAggregation.Api.Adapters;
 using TransactionAggregation.Domain.Models;
@@ -47,8 +48,9 @@ public class CSourceAdapterTests
         // Mock environment
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<CSourceAdapter>>();
 
-        var adapter = new CSourceAdapter(env.Object);
+        var adapter = new CSourceAdapter(env.Object, logger.Object);
 
         // Act
         var result = await adapter.FetchAndNormalizeAsync(customerId);
@@ -86,8 +88,9 @@ public class CSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<CSourceAdapter>>();
 
-        var adapter = new CSourceAdapter(env.Object);
+        var adapter = new CSourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("acct555");
 
@@ -115,8 +118,9 @@ public class CSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<CSourceAdapter>>();
 
-        var adapter = new CSourceAdapter(env.Object);
+        var adapter = new CSourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("acct555");
 
@@ -152,8 +156,9 @@ public class CSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<CSourceAdapter>>();
 
-        var adapter = new CSourceAdapter(env.Object);
+        var adapter = new CSourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("acct555");
 
@@ -181,8 +186,9 @@ public class CSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<CSourceAdapter>>();
 
-        var adapter = new CSourceAdapter(env.Object);
+        var adapter = new CSourceAdapter(env.Object, logger.Object);
 
         var result = await adapter.FetchAndNormalizeAsync("acct555");
 
@@ -215,8 +221,9 @@ public class CSourceAdapterTests
 
         var env = new Mock<IWebHostEnvironment>();
         env.Setup(e => e.ContentRootPath).Returns(tempRoot);
+        var logger = new Mock<ILogger<CSourceAdapter>>();
 
-        var adapter = new CSourceAdapter(env.Object);
+        var adapter = new CSourceAdapter(env.Object, logger.Object);
 
         await Assert.ThrowsAsync<FormatException>(() => adapter.FetchAndNormalizeAsync("acct555"));
     }

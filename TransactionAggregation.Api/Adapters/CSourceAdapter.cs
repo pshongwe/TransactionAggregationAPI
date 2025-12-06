@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using System.Text.Json.Nodes;
 using TransactionAggregation.Domain.Abstractions;
 using TransactionAggregation.Domain.Models;
@@ -16,14 +17,17 @@ public sealed class CSourceAdapter : ITransactionSourceAdapter
     public string SourceName => "CSource";
 
     private readonly string _filePath;
+    private readonly ILogger<CSourceAdapter> _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSourceAdapter"/> class.
     /// </summary>
     /// <param name="env">The web host environment.</param>
-    public CSourceAdapter(IWebHostEnvironment env)
+    /// <param name="logger">The logger.</param>
+    public CSourceAdapter(IWebHostEnvironment env, ILogger<CSourceAdapter> logger)
     {
         _filePath = Path.Combine(env.ContentRootPath, "MockData", "CSource.json");
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     /// <summary>
@@ -37,12 +41,18 @@ public sealed class CSourceAdapter : ITransactionSourceAdapter
         CancellationToken ct = default)
     {
         if (!File.Exists(_filePath))
+        {
+            _logger.LogWarning("CSource data file missing at {FilePath}", _filePath);
             return Array.Empty<UnifiedTransaction>();
+        }
 
         var json = await File.ReadAllTextAsync(_filePath, ct);
         var root = JsonNode.Parse(json)?.AsObject();
         if (root is null)
+        {
+            _logger.LogWarning("CSource payload at {FilePath} was empty or invalid JSON", _filePath);
             return Array.Empty<UnifiedTransaction>();
+        }
 
         var cust = root["account"]?.GetValue<string>();
         if (!string.Equals(cust, customerId, StringComparison.OrdinalIgnoreCase))
@@ -75,6 +85,7 @@ public sealed class CSourceAdapter : ITransactionSourceAdapter
             ));
         }
 
+        _logger.LogInformation("Fetched {TransactionCount} transactions from CSource for customer {CustomerId}", list.Count, customerId);
         return list;
     }
 }
