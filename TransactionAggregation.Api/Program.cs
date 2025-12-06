@@ -2,6 +2,7 @@ using Microsoft.OpenApi.Models;
 using TransactionAggregation.Api.Adapters;
 using TransactionAggregation.Api.Middleware;
 using TransactionAggregation.Api.Security;
+using TransactionAggregation.Api.Services;
 using TransactionAggregation.Domain.Abstractions;
 using TransactionAggregation.Domain.Services;
 
@@ -80,6 +81,8 @@ public partial class Program
         builder.Services.AddSingleton<ITransactionSourceAdapter, BSourceAdapter>();
         builder.Services.AddSingleton<ITransactionSourceAdapter, CSourceAdapter>();
         builder.Services.AddScoped<ITransactionAggregationService, TransactionAggregationService>();
+        builder.Services.Decorate<ITransactionAggregationService, CachedTransactionAggregationService>();
+        builder.Services.AddMemoryCache();
 
         // Enterprise security bundle
         builder.Services.AddEnterpriseSecurity(builder.Configuration);

@@ -39,6 +39,13 @@ public class JwtTokenService : IJwtTokenService
         _signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
     }
 
+    /// <summary>
+    /// Generates a signed JWT for the provided user and optional role.
+    /// </summary>
+    /// <param name="userId">Identity used as subject claim.</param>
+    /// <param name="role">Optional role claim to include.</param>
+    /// <param name="lifetime">Optional TTL; defaults to one hour.</param>
+    /// <returns>Serialized JWT string ready for Authorization headers.</returns>
     public string GenerateToken(string userId, string? role = null, TimeSpan? lifetime = null)
     {
         lifetime ??= TimeSpan.FromHours(1);

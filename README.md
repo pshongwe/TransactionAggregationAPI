@@ -56,6 +56,13 @@ A **.NET 8** service that ingests customer transactions from heterogeneous upstr
 
 ---
 
+## Caching Strategy
+- The API decorates `ITransactionAggregationService` with an in-memory cache that stores transaction lists and summaries per customer/date range for a couple of minutes, reducing duplicate aggregation work in demos.
+- Swapping to Redis (or any distributed cache) only requires registering `IDistributedCache` (e.g., `AddStackExchangeRedisCache`) and updating the decorator to depend on it, because all cache keys already use stable strings.
+- Cache lifetimes are intentionally short to ensure demo data stays fresh; adjust `AbsoluteTtl`/`SlidingTtl` inside `CachedTransactionAggregationService` to tune behavior for real workloads.
+
+---
+
 ## Getting Started
 1. **Prerequisites**
    - .NET SDK 8.0 (`dotnet --list-sdks` to confirm)

@@ -1,5 +1,6 @@
 using Moq;
 using TransactionAggregation.Domain.Abstractions;
+using TransactionAggregation.Domain.Models;
 using TransactionAggregation.Domain.Services;
 using TransactionAggregation.Tests.TestUtils;
 using Xunit;
@@ -104,5 +105,29 @@ public class AggregationServiceTests
         // Assert
         Assert.Single(result);
         Assert.Equal("inside", result.First().TransactionId);
+    }
+
+    [Fact]
+    public async Task AggregationService_Does_Not_Cache_When_Not_Requested()
+    {
+        var customerId = "cust123";
+
+        var txn = UnifiedTransactionBuilder.Default()
+            .WithCustomerId(customerId)
+            .WithTransactionId("t1")
+            .Build();
+
+        var source = new Mock<ITransactionSourceAdapter>();
+        source.SetupSequence(s => s.FetchAndNormalizeAsync(customerId, default))
+              .ReturnsAsync(new[] { txn })
+              .ReturnsAsync(Array.Empty<UnifiedTransaction>());
+
+        var sut = new TransactionAggregationService(new[] { source.Object });
+
+        var firstCall = await sut.GetAllAsync(customerId);
+        var secondCall = await sut.GetAllAsync(customerId);
+
+        Assert.Single(firstCall);
+        Assert.Empty(secondCall);
     }
 }
